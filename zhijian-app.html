@@ -264,6 +264,29 @@ body {
 .modal-close svg { width: 14px; height: 14px; color: #666; }
 .modal-body { padding: 0 16px 30px; }
 
+/* Version Dialog */
+.ver-dialog {
+  position: absolute; left: 20px; right: 20px; top: 50%; transform: translateY(-46%) scale(.96);
+  background: #fff; border-radius: 18px; z-index: 101; opacity: 0; pointer-events: none;
+  transition: opacity .25s, transform .25s; overflow: hidden;
+}
+.ver-dialog.show { opacity: 1; pointer-events: auto; transform: translateY(-50%) scale(1); }
+.ver-dialog-head { background: linear-gradient(135deg, #1a1a1a 0%, #3a3a3a 100%); padding: 20px 18px 16px; color: #fff; }
+.ver-dialog-badge { display: inline-block; font-size: 10px; padding: 3px 10px; border-radius: 10px; background: rgba(255,255,255,0.16); letter-spacing: .5px; margin-bottom: 8px; }
+.ver-dialog-title { font-size: 16px; font-weight: 700; }
+.ver-dialog-sub { font-size: 11px; color: rgba(255,255,255,0.65); margin-top: 4px; }
+.ver-dialog-body { padding: 14px 16px 6px; max-height: 340px; overflow-y: auto; }
+.ver-dialog-body::-webkit-scrollbar { display: none; }
+.ver-section-label { font-size: 11px; font-weight: 600; color: #999; margin: 4px 0 8px; }
+.ver-feat { display: flex; align-items: flex-start; gap: 8px; font-size: 12px; color: #333; line-height: 1.5; padding: 5px 0; }
+.ver-feat-dot { width: 6px; height: 6px; border-radius: 50%; background: #5B6EF5; flex-shrink: 0; margin-top: 5px; }
+.ver-lock { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #999; padding: 6px 0; }
+.ver-lock svg { width: 13px; height: 13px; flex-shrink: 0; color: #bbb; }
+.ver-note { font-size: 11px; color: #999; line-height: 1.6; background: #FAFAFA; border-radius: 10px; padding: 10px 12px; margin-top: 10px; }
+.ver-dialog-foot { padding: 12px 16px 18px; }
+.ver-dialog-btn { width: 100%; padding: 12px 0; border: none; border-radius: 12px; background: #1a1a1a; color: #fff; font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit; }
+.ver-dialog-btn:active { opacity: .85; }
+
 /* AI Chat */
 .chat-messages { padding: 16px; display: flex; flex-direction: column; gap: 12px; }
 .chat-msg { max-width: 80%; padding: 10px 14px; border-radius: 14px; font-size: 14px; line-height: 1.5; }
@@ -381,6 +404,8 @@ body {
 }
 .cp-submit-btn:active { opacity: 0.85; }
 .cp-submit-hint { text-align: center; font-size: 11px; color: #999; margin-top: 6px; }
+.cp-sample-link { text-align: center; font-size: 11px; color: #5B6EF5; margin-top: 8px; cursor: pointer; }
+.cp-sample-link:active { opacity: .7; }
 
 /* ============ TIME ECHO PAGE ============ */
 .timeecho-overlay {
@@ -443,6 +468,7 @@ body {
 /* Tab Content */
 .te-tab-panel { display: none; padding: 0 16px 24px; }
 .te-tab-panel.active { display: block; }
+.cr-panel { padding: 0 16px 24px; }
 
 /* Section Title in Tab */
 .te-section-title {
@@ -1180,6 +1206,42 @@ body {
     </div>
   </div>
 
+  <!-- Version Dialog -->
+  <div class="modal-overlay" id="verOverlay" onclick="closeVersionDialog()"></div>
+  <div class="ver-dialog" id="versionDialog">
+    <div class="ver-dialog-head">
+      <span class="ver-dialog-badge">内测预览版</span>
+      <div class="ver-dialog-title">智简 v0.9 Beta · 版本说明</div>
+      <div class="ver-dialog-sub">当前版本能做什么，一次讲清楚</div>
+    </div>
+    <div class="ver-dialog-body">
+      <div class="ver-section-label">本版本已开放</div>
+      <div class="ver-feat"><span class="ver-feat-dot"></span>与「小简」AI 伙伴对话，聊职业困惑与自我认知</div>
+      <div class="ver-feat"><span class="ver-feat-dot"></span>能力测评：性格、价值观、兴趣等多维测评</div>
+      <div class="ver-feat"><span class="ver-feat-dot"></span>生涯规划测评：13 题作答，生成专属生涯海报</div>
+      <div class="ver-feat"><span class="ver-feat-dot"></span>模拟面试训练与面试预测</div>
+      <div class="ver-feat"><span class="ver-feat-dot"></span>简历制作与智能诊断</div>
+      <div class="ver-feat"><span class="ver-feat-dot"></span>时光回响：成长轨迹与多维画像回顾</div>
+      <div class="ver-section-label" style="margin-top:12px;">更多功能 · 暂时保密</div>
+      <div class="ver-lock">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        AI 智能体深度定制
+      </div>
+      <div class="ver-lock">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        校招内推通道与行业薪酬库
+      </div>
+      <div class="ver-lock">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        更多神秘能力，正式版揭晓
+      </div>
+      <div class="ver-note">本版本为内部预览版，功能范围如上所示；保密功能将在正式版发布后开放，敬请期待。</div>
+    </div>
+    <div class="ver-dialog-foot">
+      <button class="ver-dialog-btn" onclick="closeVersionDialog()">知道了，开始体验</button>
+    </div>
+  </div>
+
   <!-- Prediction Sub-Page -->
   <div class="prediction-overlay" id="predictionPage">
     <div class="status-bar">
@@ -1518,6 +1580,7 @@ body {
     <div class="cp-submit-bar">
       <button class="cp-submit-btn" onclick="submitCareerPlan()">生成我的生涯海报</button>
       <div class="cp-submit-hint">已答 <span id="cpProgress">0</span> / 13 题 · 作答越完整，判断越准确</div>
+      <div class="cp-sample-link" onclick="submitCareerPlan()">不想填写？直接查看示例海报 →</div>
     </div>
   </div>
 
@@ -1567,6 +1630,7 @@ body {
         </div>
       </div>
 
+      <div class="cr-panel">
       <!-- Route Fit Scores -->
       <div class="te-skill-card">
         <div style="font-size:13px;font-weight:600;color:#1a1a1a;margin-bottom:12px;">四路线契合度</div>
@@ -1635,7 +1699,7 @@ body {
 
       <!-- AI Summary -->
       <div class="te-summary-card">
-        <div style="font-size:13px;font-weight:600;color:#1a1a1a;margin-bottom:8px;">AI 综合结论</div>
+        <div class="te-summary-title">AI 综合结论</div>
         <div class="te-summary-text" id="cr-summary">示例数据：你把「自由」排在首位，同时看重「意义」与「表达空间」，证据多来自内容创作与社团组织经历。综合 13 题作答，你与「就业」路线契合度最高（78%），适合先进入内容运营 / 用户研究方向积累作品，再逐步扩大表达空间。本页为演示用的示例结果。</div>
       </div>
 
@@ -1649,26 +1713,27 @@ body {
           <div class="te-timeline-dot normal"></div>
           <div class="te-timeline-date">第 1-30 天</div>
           <div class="te-timeline-content">
-            完成 2 项能力测评，锁定目标岗位的核心技能清单，产出第一份针对性简历。
-            <div class="te-tl-tag assess">能力测评</div>
+            <span class="te-tl-tag assess">能力测评</span>
+            <div>完成 2 项能力测评，锁定目标岗位的核心技能清单，产出第一份针对性简历。</div>
           </div>
         </div>
         <div class="te-timeline-item">
           <div class="te-timeline-dot growth"></div>
           <div class="te-timeline-date">第 31-60 天</div>
           <div class="te-timeline-content">
-            与「小简」进行 3 次职业对话，打磨一段自我介绍，并完成 1 次模拟面试。
-            <div class="te-tl-tag chat">AI 对话</div>
+            <span class="te-tl-tag chat">AI 对话</span>
+            <div>与「小简」进行 3 次职业对话，打磨一段自我介绍，并完成 1 次模拟面试。</div>
           </div>
         </div>
         <div class="te-timeline-item">
           <div class="te-timeline-dot highlight"></div>
           <div class="te-timeline-date">第 61-90 天</div>
           <div class="te-timeline-content">
-            投递 10 家目标公司，复盘面试反馈，沉淀 1 个可展示的个人作品集。
-            <div class="te-tl-tag milestone">里程碑</div>
+            <span class="te-tl-tag milestone">里程碑</span>
+            <div>投递 10 家目标公司，复盘面试反馈，沉淀 1 个可展示的个人作品集。</div>
           </div>
         </div>
+      </div>
       </div>
     </div>
   </div>
@@ -2174,11 +2239,14 @@ body {
     var routes = Object.keys(scores).sort(function(a, b) { return scores[b] - scores[a]; });
     var top = routes[0];
     var answered = cpUpdateProgress();
+    var sample = answered === 0;
+    var values = sample ? ['自由', '稳定', '意义', '钱', '影响力', '表达空间'] : cpValues;
+    var shownAnswered = sample ? 13 : answered;
     document.getElementById('cr-name').textContent = '李同学 · 推荐路线：' + top;
     document.getElementById('cr-fit').textContent = scores[top];
-    document.getElementById('cr-answered').textContent = answered;
-    document.getElementById('cr-value').textContent = cpValues[0];
-    document.getElementById('cr-mbti').textContent = document.getElementById('cp-q13b').value || '未填';
+    document.getElementById('cr-answered').textContent = shownAnswered;
+    document.getElementById('cr-value').textContent = values[0];
+    document.getElementById('cr-mbti').textContent = document.getElementById('cp-q13b').value || 'ENFP';
     var fills = ['up', 'mid', 'soft', 'soft'];
     routes.forEach(function(name, i) {
       document.getElementById('cr-r' + i + '-name').textContent = name;
@@ -2188,11 +2256,11 @@ body {
       bar.className = 'te-skill-bar-fill ' + fills[i];
     });
     var anchorHtml = '';
-    cpValues.slice(0, 3).forEach(function(v, i) {
+    values.slice(0, 3).forEach(function(v, i) {
       anchorHtml += '<span class="te-anchor-tag' + (i < 2 ? ' stable' : '') + '">' + v + '</span>';
     });
     document.getElementById('cr-anchors').innerHTML = anchorHtml;
-    document.getElementById('cr-summary').textContent = '示例数据：你把「' + cpValues[0] + '」排在首位，同时看重「' + cpValues[1] + '」与「' + cpValues[2] + '」。综合 ' + answered + ' 题作答，你与「' + top + '」路线契合度最高（' + scores[top] + '%），建议先从目标方向的实践与作品积累开始，稳步迭代。本页为演示用的示例结果。';
+    document.getElementById('cr-summary').textContent = '示例数据：你把「' + values[0] + '」排在首位，同时看重「' + values[1] + '」与「' + values[2] + '」。综合 ' + shownAnswered + ' 题作答，你与「' + top + '」路线契合度最高（' + scores[top] + '%），建议先从目标方向的实践与作品积累开始，稳步迭代。本页为演示用的示例结果。';
     document.getElementById('careerResultPage').classList.add('show');
     document.getElementById('careerResultBody').scrollTop = 0;
   };
@@ -2249,6 +2317,18 @@ body {
   document.getElementById('chatInput').addEventListener('keydown', function(e) {
     if (e.key === 'Enter') sendChat();
   });
+
+  window.openVersionDialog = function() {
+    document.getElementById('verOverlay').classList.add('show');
+    document.getElementById('versionDialog').classList.add('show');
+  };
+
+  window.closeVersionDialog = function() {
+    document.getElementById('verOverlay').classList.remove('show');
+    document.getElementById('versionDialog').classList.remove('show');
+  };
+
+  setTimeout(openVersionDialog, 500);
 
   cpRenderRank();
   cpUpdateProgress();

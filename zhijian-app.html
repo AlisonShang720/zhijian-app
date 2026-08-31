@@ -334,6 +334,54 @@ body {
 }
 .q-guide-label { font-weight: 600; color: #666; }
 
+/* Career Plan Form Controls */
+.cp-input, .cp-textarea {
+  width: 100%; border: 1px solid #E5E5E5; border-radius: 10px;
+  background: #FAFAFA; padding: 10px 12px; font-size: 13px; color: #333;
+  outline: none; font-family: inherit; resize: none; margin-top: 10px;
+  transition: border-color 0.2s, background 0.2s;
+}
+.cp-input:focus, .cp-textarea:focus { border-color: #5B6EF5; background: #fff; }
+.cp-input::placeholder, .cp-textarea::placeholder { color: #bbb; }
+.cp-field-label { font-size: 12px; color: #666; margin-top: 10px; margin-bottom: 2px; }
+.cp-choice-row { display: flex; border: 1px solid #E5E5E5; border-radius: 10px; overflow: hidden; margin-top: 6px; }
+.cp-choice {
+  flex: 1; padding: 9px 0; text-align: center; font-size: 12px; color: #666;
+  background: #FAFAFA; cursor: pointer; transition: all 0.15s; border-right: 0.5px solid #E5E5E5;
+}
+.cp-choice:last-child { border-right: none; }
+.cp-choice:active { background: #F0F0F0; }
+.cp-choice.active { background: #1a1a1a; color: #fff; font-weight: 600; }
+.cp-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.cp-chip {
+  font-size: 12px; padding: 6px 14px; border-radius: 20px; background: #F5F5F5;
+  color: #555; border: 1px solid #eee; cursor: pointer; transition: all 0.15s;
+}
+.cp-chip.active { background: #EEF2FF; color: #5B6EF5; border-color: rgba(91,110,245,0.3); font-weight: 600; }
+.cp-rank-item {
+  display: flex; align-items: center; gap: 10px; padding: 10px 12px;
+  background: #FAFAFA; border: 1px solid #F0F0F0; border-radius: 10px; margin-top: 8px;
+}
+.cp-rank-num { width: 20px; text-align: center; font-size: 13px; font-weight: 700; color: #999; flex-shrink: 0; }
+.cp-rank-label { flex: 1; font-size: 13px; color: #333; font-weight: 500; }
+.cp-rank-arrows { display: flex; gap: 4px; }
+.cp-rank-btn {
+  width: 24px; height: 24px; border-radius: 6px; background: #fff; border: 1px solid #E5E5E5;
+  display: flex; align-items: center; justify-content: center; cursor: pointer; color: #666;
+}
+.cp-rank-btn:active { background: #F0F0F0; }
+.cp-rank-btn svg { width: 12px; height: 12px; }
+.cp-rank-btn.disabled { opacity: 0.3; pointer-events: none; }
+.cp-rank-hint { text-align: center; font-size: 11px; color: #999; margin-top: 8px; }
+.cp-submit-bar { padding: 12px 16px; background: #fff; border-top: 0.5px solid #E5E5E5; flex-shrink: 0; }
+.cp-submit-btn {
+  width: 100%; padding: 14px 0; border-radius: 12px; border: none;
+  background: linear-gradient(135deg, #1a1a1a 0%, #333 100%); color: #fff;
+  font-size: 15px; font-weight: 600; cursor: pointer; font-family: inherit;
+}
+.cp-submit-btn:active { opacity: 0.85; }
+.cp-submit-hint { text-align: center; font-size: 11px; color: #999; margin-top: 6px; }
+
 /* ============ TIME ECHO PAGE ============ */
 .timeecho-overlay {
   position: absolute; inset: 0; background: #F5F5F5; z-index: 160;
@@ -675,6 +723,12 @@ body {
         <span class="more" onclick="openAssess()">全部 &#8250;</span>
       </div>
       <div class="feature-scroll">
+        <div class="feature-item-9" onclick="openCareerPlan()">
+          <div class="feature-icon-9 fi-blue">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+          </div>
+          <div class="feat-name">生涯规划测评</div>
+        </div>
         <div class="feature-item-9" onclick="showToast('性格测评')">
           <div class="feature-icon-9 fi-orange">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
@@ -901,9 +955,19 @@ body {
           <div class="stat-label">已完成</div>
         </div>
         <div class="stat-card highlight">
-          <div class="stat-num">7</div>
+          <div class="stat-num">8</div>
           <div class="stat-label">待探索</div>
         </div>
+      </div>
+      <div class="feat-card" onclick="openCareerPlan()">
+        <div class="feat-card-icon fi-blue">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+        </div>
+        <div class="feat-card-body">
+          <div class="feat-card-title">生涯规划测评</div>
+          <div class="feat-card-desc">判断此阶段最值得优先走的人生路线</div>
+        </div>
+        <div class="feat-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
       </div>
       <div class="feat-card" onclick="showToast('性格测评')">
         <div class="feat-card-icon fi-orange">
@@ -1239,6 +1303,372 @@ body {
           <span class="q-tag-cat q-tag-prob">提问概率 70%</span>
         </div>
         <div class="q-guide"><span class="q-guide-label">答题提示：</span>从策划到落地：方案制定 → 资源协调 → 现场执行 → 复盘总结；展示专业流程知识。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Career Plan Sub-Page -->
+  <div class="prediction-overlay" id="careerPlanPage">
+    <div class="status-bar">
+      <span class="time">9:41</span>
+      <div class="icons">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+        <div class="battery"><div class="battery-fill"></div></div>
+      </div>
+    </div>
+    <div class="pred-header">
+      <div class="pred-header-back" onclick="closeCareerPlan()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      </div>
+      <span class="pred-header-title">生涯规划测评</span>
+      <div class="pred-header-close" onclick="showToast('生成分享海报')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+      </div>
+    </div>
+    <div class="pred-body">
+      <div class="pred-intro">基于你真实做过的事情、当前的持续投入、理想生活和现实约束，帮你判断此阶段最值得优先走的方向——就业、考研、考公还是创业。</div>
+
+      <div class="section-divider">I · 经历与证据：你做过什么？</div>
+      <div class="q-card">
+        <div class="q-card-top">
+          <div class="q-num">Q1</div>
+          <div class="q-text">你做过什么？请描述你做过的项目、产品、活动或你推进过的事情。</div>
+        </div>
+        <div class="q-tags">
+          <span class="q-tag-cat">经历与证据</span>
+          <span class="q-tag-cat q-tag-prob">开放题</span>
+        </div>
+        <textarea id="cp-q1" class="cp-textarea" rows="3" oninput="cpUpdateProgress()" placeholder="例如：作为负责人组织校园二手书流转活动，持续3个月，参与人数500+..."></textarea>
+        <div class="q-guide" style="margin-top:10px;"><span class="q-guide-label">答题提示：</span>证据越具体，判断越准确。补充你的角色（如项目负责人）、持续时长（如3个月）、最终结果（如日活提升20%），并说明是否有可量化结果与外部反馈。</div>
+      </div>
+
+      <div class="section-divider">II · 当前投入：你现在在做什么？</div>
+      <div class="q-card">
+        <div class="q-card-top">
+          <div class="q-num">Q2</div>
+          <div class="q-text">你现在正在做什么？</div>
+        </div>
+        <div class="q-tags">
+          <span class="q-tag-cat">当前投入</span>
+          <span class="q-tag-cat q-tag-prob">开放题</span>
+        </div>
+        <textarea id="cp-q2" class="cp-textarea" rows="2" oninput="cpUpdateProgress()" placeholder="例如：正在准备考研、在做前端项目、在学习数据分析..."></textarea>
+      </div>
+      <div class="q-card">
+        <div class="q-card-top">
+          <div class="q-num">Q3</div>
+          <div class="q-text">最近1-3个月，你投入时间最多的事情是什么？</div>
+        </div>
+        <div class="q-tags">
+          <span class="q-tag-cat">当前投入</span>
+          <span class="q-tag-cat q-tag-prob">开放题</span>
+        </div>
+        <textarea id="cp-q3" class="cp-textarea" rows="2" oninput="cpUpdateProgress()" placeholder="例如：每天花4小时刷算法题、每周花10小时做一个Side Project..."></textarea>
+      </div>
+      <div class="q-card">
+        <div class="q-card-top">
+          <div class="q-num">Q4</div>
+          <div class="q-text">哪类事情你愿意反复做，而不容易强烈抗拒？（可多选）</div>
+        </div>
+        <div class="q-tags">
+          <span class="q-tag-cat">当前投入</span>
+          <span class="q-tag-cat q-tag-easy">多选题</span>
+        </div>
+        <div class="cp-chips" id="cp-q4-chips">
+          <span class="cp-chip" onclick="cpChip(this)">写代码</span>
+          <span class="cp-chip" onclick="cpChip(this)">与人沟通</span>
+          <span class="cp-chip" onclick="cpChip(this)">做研究</span>
+          <span class="cp-chip" onclick="cpChip(this)">组织活动</span>
+          <span class="cp-chip" onclick="cpChip(this)">写东西</span>
+        </div>
+        <textarea id="cp-q4" class="cp-textarea" rows="2" oninput="cpUpdateProgress()" placeholder="其他补充（可选）..."></textarea>
+      </div>
+
+      <div class="section-divider">III · 理想生活：你理想的生活是什么样的？</div>
+      <div class="q-card">
+        <div class="q-card-top">
+          <div class="q-num">Q5</div>
+          <div class="q-text">你理想中的一天是什么样？</div>
+        </div>
+        <div class="q-tags">
+          <span class="q-tag-cat">理想生活</span>
+          <span class="q-tag-cat q-tag-prob">开放题</span>
+        </div>
+        <textarea id="cp-q5" class="cp-textarea" rows="2" oninput="cpUpdateProgress()" placeholder="例如：上午做3小时深度工作（写代码或写东西），下午开会讨论产品方向..."></textarea>
+      </div>
+      <div class="q-card">
+        <div class="q-card-top">
+          <div class="q-num">Q6</div>
+          <div class="q-text">你想生活在什么城市或环境？你能接受什么样的工作节奏？</div>
+        </div>
+        <div class="q-tags">
+          <span class="q-tag-cat">理想生活</span>
+          <span class="q-tag-cat q-tag-prob">开放题</span>
+        </div>
+        <input id="cp-q6a" class="cp-input" oninput="cpUpdateProgress()" placeholder="城市或环境：例如一线城市、远程工作...">
+        <input id="cp-q6b" class="cp-input" oninput="cpUpdateProgress()" placeholder="工作节奏：例如朝九晚六、弹性时间...">
+      </div>
+      <div class="q-card">
+        <div class="q-card-top">
+          <div class="q-num">Q7</div>
+          <div class="q-text">对你来说，以下价值观怎么排序？（从高到低）</div>
+        </div>
+        <div class="q-tags">
+          <span class="q-tag-cat">理想生活</span>
+          <span class="q-tag-cat q-tag-easy">排序题</span>
+        </div>
+        <div id="cpRankList"></div>
+        <div class="cp-rank-hint">点按箭头调整顺序，1 = 对你最重要</div>
+      </div>
+      <div class="q-card">
+        <div class="q-card-top">
+          <div class="q-num">Q8</div>
+          <div class="q-text">什么样的生活或工作状态是你最不能忍受的？</div>
+        </div>
+        <div class="q-tags">
+          <span class="q-tag-cat">理想生活</span>
+          <span class="q-tag-cat q-tag-prob">开放题</span>
+        </div>
+        <textarea id="cp-q8" class="cp-textarea" rows="2" oninput="cpUpdateProgress()" placeholder="例如：天天开无意义的会、强销售压力、完全没有个人时间..."></textarea>
+      </div>
+
+      <div class="section-divider">IV · 现实约束：你有哪些现实约束？</div>
+      <div class="q-card">
+        <div class="q-card-top">
+          <div class="q-num">Q9</div>
+          <div class="q-text">你是否需要尽快有收入？是否有条件继续读书（2-3年）？</div>
+        </div>
+        <div class="q-tags">
+          <span class="q-tag-cat">现实约束</span>
+          <span class="q-tag-cat q-tag-med">选择题</span>
+        </div>
+        <div class="cp-field-label">是否需要尽快有收入？</div>
+        <div class="cp-choice-row" data-group="q9a">
+          <div class="cp-choice" onclick="cpChoice(this)">是</div>
+          <div class="cp-choice" onclick="cpChoice(this)">否</div>
+          <div class="cp-choice" onclick="cpChoice(this)">不确定</div>
+        </div>
+        <div class="cp-field-label">是否有条件继续读书（2-3年）？</div>
+        <div class="cp-choice-row" data-group="q9b">
+          <div class="cp-choice" onclick="cpChoice(this)">是</div>
+          <div class="cp-choice" onclick="cpChoice(this)">否</div>
+          <div class="cp-choice" onclick="cpChoice(this)">不确定</div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-card-top">
+          <div class="q-num">Q10</div>
+          <div class="q-text">你是否能接受高不确定性（如创业）？</div>
+        </div>
+        <div class="q-tags">
+          <span class="q-tag-cat">现实约束</span>
+          <span class="q-tag-cat q-tag-med">选择题</span>
+        </div>
+        <div class="cp-choice-row" data-group="q10">
+          <div class="cp-choice" onclick="cpChoice(this)">是</div>
+          <div class="cp-choice" onclick="cpChoice(this)">否</div>
+          <div class="cp-choice" onclick="cpChoice(this)">不确定</div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-card-top">
+          <div class="q-num">Q11</div>
+          <div class="q-text">是否有城市限制？还有其他限制吗？</div>
+        </div>
+        <div class="q-tags">
+          <span class="q-tag-cat">现实约束</span>
+          <span class="q-tag-cat q-tag-prob">开放题</span>
+        </div>
+        <input id="cp-q11a" class="cp-input" oninput="cpUpdateProgress()" placeholder="城市限制：例如必须在杭州、不想离开家乡（无则留空）">
+        <textarea id="cp-q11b" class="cp-textarea" rows="2" oninput="cpUpdateProgress()" placeholder="其他限制：例如家庭、学历、证书、身份等..."></textarea>
+      </div>
+
+      <div class="section-divider">V · 背景信息：你的背景信息</div>
+      <div class="q-card">
+        <div class="q-card-top">
+          <div class="q-num">Q12</div>
+          <div class="q-text">你的专业是什么？你的工作风格偏好是怎样的？</div>
+        </div>
+        <div class="q-tags">
+          <span class="q-tag-cat">背景信息</span>
+          <span class="q-tag-cat q-tag-prob">开放题</span>
+        </div>
+        <input id="cp-q12a" class="cp-input" oninput="cpUpdateProgress()" placeholder="你的专业：例如计算机科学与技术">
+        <input id="cp-q12b" class="cp-input" oninput="cpUpdateProgress()" placeholder="工作风格：例如喜欢独立工作、擅长团队协作">
+      </div>
+      <div class="q-card">
+        <div class="q-card-top">
+          <div class="q-num">Q13</div>
+          <div class="q-text">你的核心技能有哪些？你的 MBTI 类型是什么？</div>
+        </div>
+        <div class="q-tags">
+          <span class="q-tag-cat">背景信息</span>
+          <span class="q-tag-cat q-tag-prob">开放题</span>
+        </div>
+        <textarea id="cp-q13a" class="cp-textarea" rows="2" oninput="cpUpdateProgress()" placeholder="例如：Python、数据分析、用户调研、产品设计..."></textarea>
+        <select id="cp-q13b" class="cp-input" onchange="cpUpdateProgress()">
+          <option value="">MBTI：不确定 / 不想填</option>
+          <option>INTJ</option><option>INTP</option><option>ENTJ</option><option>ENTP</option>
+          <option>INFJ</option><option>INFP</option><option>ENFJ</option><option>ENFP</option>
+          <option>ISTJ</option><option>ISFJ</option><option>ESTJ</option><option>ESFJ</option>
+          <option>ISTP</option><option>ISFP</option><option>ESTP</option><option>ESFP</option>
+        </select>
+      </div>
+    </div>
+    <div class="cp-submit-bar">
+      <button class="cp-submit-btn" onclick="submitCareerPlan()">生成我的生涯海报</button>
+      <div class="cp-submit-hint">已答 <span id="cpProgress">0</span> / 13 题 · 作答越完整，判断越准确</div>
+    </div>
+  </div>
+
+  <!-- Career Result Poster Page -->
+  <div class="timeecho-overlay" id="careerResultPage">
+    <div class="status-bar">
+      <span class="time">9:41</span>
+      <div class="icons">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+        <div class="battery"><div class="battery-fill"></div></div>
+      </div>
+    </div>
+    <div class="te-header">
+      <div class="te-header-back" onclick="closeCareerResult()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      </div>
+      <span class="te-header-title">我的生涯海报</span>
+      <div class="te-header-share" onclick="showToast('生成分享海报')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+      </div>
+    </div>
+    <div class="te-body" id="careerResultBody">
+      <!-- Overview -->
+      <div class="te-overview">
+        <div class="te-overview-title">你的生涯罗盘 · 结果示例</div>
+        <div class="te-overview-name" id="cr-name">李同学 · 推荐路线：就业</div>
+        <div class="te-stats-row">
+          <div class="te-stat">
+            <div class="te-stat-num" id="cr-fit">78</div>
+            <div class="te-stat-label">路线契合</div>
+          </div>
+          <div class="te-stat-divider"></div>
+          <div class="te-stat">
+            <div class="te-stat-num" id="cr-answered">0</div>
+            <div class="te-stat-label">已答题数</div>
+          </div>
+          <div class="te-stat-divider"></div>
+          <div class="te-stat">
+            <div class="te-stat-num" id="cr-value">自由</div>
+            <div class="te-stat-label">首要价值</div>
+          </div>
+          <div class="te-stat-divider"></div>
+          <div class="te-stat">
+            <div class="te-stat-num" id="cr-mbti">ENFP</div>
+            <div class="te-stat-label">MBTI</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Route Fit Scores -->
+      <div class="te-skill-card">
+        <div style="font-size:13px;font-weight:600;color:#1a1a1a;margin-bottom:12px;">四路线契合度</div>
+        <div class="te-skill-item">
+          <div class="te-skill-top">
+            <span class="te-skill-name" id="cr-r0-name">就业</span>
+            <span class="te-skill-val" id="cr-r0-val">78%</span>
+          </div>
+          <div class="te-skill-bar-bg"><div class="te-skill-bar-fill up" id="cr-r0-bar" style="width:78%;"></div></div>
+        </div>
+        <div class="te-skill-item">
+          <div class="te-skill-top">
+            <span class="te-skill-name" id="cr-r1-name">考研</span>
+            <span class="te-skill-val" id="cr-r1-val">62%</span>
+          </div>
+          <div class="te-skill-bar-bg"><div class="te-skill-bar-fill mid" id="cr-r1-bar" style="width:62%;"></div></div>
+        </div>
+        <div class="te-skill-item">
+          <div class="te-skill-top">
+            <span class="te-skill-name" id="cr-r2-name">考公</span>
+            <span class="te-skill-val" id="cr-r2-val">45%</span>
+          </div>
+          <div class="te-skill-bar-bg"><div class="te-skill-bar-fill soft" id="cr-r2-bar" style="width:45%;"></div></div>
+        </div>
+        <div class="te-skill-item">
+          <div class="te-skill-top">
+            <span class="te-skill-name" id="cr-r3-name">创业</span>
+            <span class="te-skill-val" id="cr-r3-val">30%</span>
+          </div>
+          <div class="te-skill-bar-bg"><div class="te-skill-bar-fill soft" id="cr-r3-bar" style="width:30%;"></div></div>
+        </div>
+      </div>
+
+      <!-- Radar -->
+      <div class="te-skill-card">
+        <div style="font-size:13px;font-weight:600;color:#1a1a1a;margin-bottom:8px;">五维匹配雷达</div>
+        <div class="te-radar-wrap">
+          <svg class="te-radar-svg" viewBox="-100 -100 200 200">
+            <polygon points="0,-80 76,-25 47,65 -47,65 -76,-25" fill="none" stroke="#E5E5E5" stroke-width="1"/>
+            <polygon points="0,-53 51,-17 31,43 -31,43 -51,-17" fill="none" stroke="#EEE" stroke-width="1"/>
+            <polygon points="0,-27 25,-8 16,22 -16,22 -25,-8" fill="none" stroke="#F2F2F2" stroke-width="1"/>
+            <line x1="0" y1="0" x2="0" y2="-80" stroke="#EEE" stroke-width="1"/>
+            <line x1="0" y1="0" x2="76" y2="-25" stroke="#EEE" stroke-width="1"/>
+            <line x1="0" y1="0" x2="47" y2="65" stroke="#EEE" stroke-width="1"/>
+            <line x1="0" y1="0" x2="-47" y2="65" stroke="#EEE" stroke-width="1"/>
+            <line x1="0" y1="0" x2="-76" y2="-25" stroke="#EEE" stroke-width="1"/>
+            <polygon id="cr-radar" points="0,-58 61,-20 40,55 -31,43 -53,-17" fill="rgba(91,110,245,0.2)" stroke="#5B6EF5" stroke-width="1.5"/>
+            <text x="0" y="-86" text-anchor="middle" font-size="9" fill="#666">证据强度 72</text>
+            <text x="88" y="-25" text-anchor="start" font-size="9" fill="#666">投入度 80</text>
+            <text x="54" y="74" text-anchor="start" font-size="9" fill="#666">价值清晰 85</text>
+            <text x="-54" y="74" text-anchor="end" font-size="9" fill="#666">可行性 66</text>
+            <text x="-88" y="-25" text-anchor="end" font-size="9" fill="#666">技能匹配 70</text>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Value Anchors -->
+      <div class="te-anchor-card">
+        <div style="font-size:13px;font-weight:600;color:#1a1a1a;margin-bottom:12px;">你的价值锚点</div>
+        <div class="te-anchor-row" id="cr-anchors">
+          <span class="te-anchor-tag stable">自由</span>
+          <span class="te-anchor-tag stable">意义</span>
+          <span class="te-anchor-tag">表达空间</span>
+        </div>
+      </div>
+
+      <!-- AI Summary -->
+      <div class="te-summary-card">
+        <div style="font-size:13px;font-weight:600;color:#1a1a1a;margin-bottom:8px;">AI 综合结论</div>
+        <div class="te-summary-text" id="cr-summary">示例数据：你把「自由」排在首位，同时看重「意义」与「表达空间」，证据多来自内容创作与社团组织经历。综合 13 题作答，你与「就业」路线契合度最高（78%），适合先进入内容运营 / 用户研究方向积累作品，再逐步扩大表达空间。本页为演示用的示例结果。</div>
+      </div>
+
+      <!-- 90-day Plan -->
+      <div class="te-section-title">
+        <div class="te-section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        90 天行动建议
+      </div>
+      <div class="te-timeline">
+        <div class="te-timeline-item">
+          <div class="te-timeline-dot normal"></div>
+          <div class="te-timeline-date">第 1-30 天</div>
+          <div class="te-timeline-content">
+            完成 2 项能力测评，锁定目标岗位的核心技能清单，产出第一份针对性简历。
+            <div class="te-tl-tag assess">能力测评</div>
+          </div>
+        </div>
+        <div class="te-timeline-item">
+          <div class="te-timeline-dot growth"></div>
+          <div class="te-timeline-date">第 31-60 天</div>
+          <div class="te-timeline-content">
+            与「小简」进行 3 次职业对话，打磨一段自我介绍，并完成 1 次模拟面试。
+            <div class="te-tl-tag chat">AI 对话</div>
+          </div>
+        </div>
+        <div class="te-timeline-item">
+          <div class="te-timeline-dot highlight"></div>
+          <div class="te-timeline-date">第 61-90 天</div>
+          <div class="te-timeline-content">
+            投递 10 家目标公司，复盘面试反馈，沉淀 1 个可展示的个人作品集。
+            <div class="te-tl-tag milestone">里程碑</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1657,6 +2087,120 @@ body {
     document.getElementById('predictionPage').classList.remove('show');
   };
 
+  window.openCareerPlan = function() {
+    document.getElementById('careerPlanPage').classList.add('show');
+  };
+
+  window.closeCareerPlan = function() {
+    document.getElementById('careerPlanPage').classList.remove('show');
+  };
+
+  var cpValues = ['稳定', '钱', '自由', '意义', '影响力', '表达空间'];
+  var cpRankTouched = false;
+
+  function cpRenderRank() {
+    var list = document.getElementById('cpRankList');
+    if (!list) return;
+    var html = '';
+    cpValues.forEach(function(v, i) {
+      html += '<div class="cp-rank-item">' +
+        '<div class="cp-rank-num"' + (i === 0 ? ' style="color:#E8703A;"' : '') + '>' + (i + 1) + '</div>' +
+        '<div class="cp-rank-label">' + v + '</div>' +
+        '<div class="cp-rank-arrows">' +
+        '<div class="cp-rank-btn' + (i === 0 ? ' disabled' : '') + '" onclick="cpRankMove(' + i + ',-1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg></div>' +
+        '<div class="cp-rank-btn' + (i === cpValues.length - 1 ? ' disabled' : '') + '" onclick="cpRankMove(' + i + ',1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>' +
+        '</div></div>';
+    });
+    list.innerHTML = html;
+  }
+
+  window.cpRankMove = function(idx, dir) {
+    var j = idx + dir;
+    if (j < 0 || j >= cpValues.length) return;
+    var tmp = cpValues[idx];
+    cpValues[idx] = cpValues[j];
+    cpValues[j] = tmp;
+    cpRankTouched = true;
+    cpRenderRank();
+    cpUpdateProgress();
+  };
+
+  window.cpChoice = function(el) {
+    var row = el.parentNode;
+    row.querySelectorAll('.cp-choice').forEach(function(c) { c.classList.remove('active'); });
+    el.classList.add('active');
+    cpUpdateProgress();
+  };
+
+  window.cpChip = function(el) {
+    el.classList.toggle('active');
+    cpUpdateProgress();
+  };
+
+  window.cpUpdateProgress = function() {
+    var n = 0;
+    function txt(id) { var el = document.getElementById(id); return el && el.value.trim() !== ''; }
+    function active(group) { return document.querySelector('.cp-choice-row[data-group="' + group + '"] .cp-choice.active'); }
+    if (txt('cp-q1')) n++;
+    if (txt('cp-q2')) n++;
+    if (txt('cp-q3')) n++;
+    if (document.querySelectorAll('#cp-q4-chips .cp-chip.active').length > 0 || txt('cp-q4')) n++;
+    if (txt('cp-q5')) n++;
+    if (txt('cp-q6a') || txt('cp-q6b')) n++;
+    if (cpRankTouched) n++;
+    if (txt('cp-q8')) n++;
+    if (active('q9a') || active('q9b')) n++;
+    if (active('q10')) n++;
+    if (txt('cp-q11a') || txt('cp-q11b')) n++;
+    if (txt('cp-q12a') || txt('cp-q12b')) n++;
+    if (txt('cp-q13a') || document.getElementById('cp-q13b').value !== '') n++;
+    var p = document.getElementById('cpProgress');
+    if (p) p.textContent = n;
+    return n;
+  };
+
+  window.submitCareerPlan = function() {
+    var scores = { '就业': 78, '考研': 62, '考公': 45, '创业': 30 };
+    var q9a = document.querySelector('.cp-choice-row[data-group="q9a"] .cp-choice.active');
+    var q9b = document.querySelector('.cp-choice-row[data-group="q9b"] .cp-choice.active');
+    var q10 = document.querySelector('.cp-choice-row[data-group="q10"] .cp-choice.active');
+    if (q9a && q9a.textContent === '是') { scores['就业'] += 6; scores['考研'] -= 8; scores['创业'] -= 10; }
+    if (q9b && q9b.textContent === '是') { scores['考研'] += 12; }
+    if (q10) {
+      if (q10.textContent === '是') scores['创业'] += 14;
+      if (q10.textContent === '否') scores['创业'] -= 8;
+    }
+    Object.keys(scores).forEach(function(k) { scores[k] = Math.max(5, Math.min(98, scores[k])); });
+    var routes = Object.keys(scores).sort(function(a, b) { return scores[b] - scores[a]; });
+    var top = routes[0];
+    var answered = cpUpdateProgress();
+    document.getElementById('cr-name').textContent = '李同学 · 推荐路线：' + top;
+    document.getElementById('cr-fit').textContent = scores[top];
+    document.getElementById('cr-answered').textContent = answered;
+    document.getElementById('cr-value').textContent = cpValues[0];
+    document.getElementById('cr-mbti').textContent = document.getElementById('cp-q13b').value || '未填';
+    var fills = ['up', 'mid', 'soft', 'soft'];
+    routes.forEach(function(name, i) {
+      document.getElementById('cr-r' + i + '-name').textContent = name;
+      document.getElementById('cr-r' + i + '-val').textContent = scores[name] + '%';
+      var bar = document.getElementById('cr-r' + i + '-bar');
+      bar.style.width = scores[name] + '%';
+      bar.className = 'te-skill-bar-fill ' + fills[i];
+    });
+    var anchorHtml = '';
+    cpValues.slice(0, 3).forEach(function(v, i) {
+      anchorHtml += '<span class="te-anchor-tag' + (i < 2 ? ' stable' : '') + '">' + v + '</span>';
+    });
+    document.getElementById('cr-anchors').innerHTML = anchorHtml;
+    document.getElementById('cr-summary').textContent = '示例数据：你把「' + cpValues[0] + '」排在首位，同时看重「' + cpValues[1] + '」与「' + cpValues[2] + '」。综合 ' + answered + ' 题作答，你与「' + top + '」路线契合度最高（' + scores[top] + '%），建议先从目标方向的实践与作品积累开始，稳步迭代。本页为演示用的示例结果。';
+    document.getElementById('careerResultPage').classList.add('show');
+    document.getElementById('careerResultBody').scrollTop = 0;
+  };
+
+  window.closeCareerResult = function() {
+    document.getElementById('careerResultPage').classList.remove('show');
+  };
+
   window.openTimeEcho = function() {
     document.getElementById('timeechoPage').classList.add('show');
   };
@@ -1670,7 +2214,7 @@ body {
     var tePanels = document.querySelectorAll('.te-tab-panel');
     teTabs.forEach(function(tab, i) { tab.classList.toggle('active', i === index); });
     tePanels.forEach(function(panel, i) { panel.classList.toggle('active', i === index); });
-    document.querySelector('.te-body').scrollTop = 0;
+    document.querySelector('#timeechoPage .te-body').scrollTop = 0;
   };
 
   var toastTimer = null;
@@ -1705,6 +2249,9 @@ body {
   document.getElementById('chatInput').addEventListener('keydown', function(e) {
     if (e.key === 'Enter') sendChat();
   });
+
+  cpRenderRank();
+  cpUpdateProgress();
 })();
 </script>
 </body>

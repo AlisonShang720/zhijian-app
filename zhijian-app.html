@@ -689,6 +689,25 @@ body {
 @media (min-width: 431px) and (max-width: 480px) {
   :root { --status-bar-h: 54px; }
 }
+/* ==== Quiz Engine (通用测评) ==== */
+.qz-cat-desc { font-size: 13px; color: #666; line-height: 1.6; background:#fff; border-radius:12px; padding:12px 14px; margin-bottom:12px; }
+.qz-progress-row { display:flex; align-items:center; gap:10px; padding:12px 16px; background:#fff; border-bottom:0.5px solid #E5E5E5; }
+.qz-progress-track { flex:1; height:6px; background:#EFEFEF; border-radius:3px; overflow:hidden; }
+.qz-progress-fill { height:100%; background:#1a1a1a; border-radius:3px; transition:width .25s; }
+.qz-progress-text { font-size:11px; color:#999; flex-shrink:0; }
+.qz-question-num { font-size:12px; color:#5B6EF5; font-weight:600; margin-bottom:6px; }
+.qz-question-text { font-size:16px; font-weight:600; color:#1a1a1a; line-height:1.6; }
+.qz-opt { display:flex; align-items:flex-start; gap:10px; width:100%; text-align:left; background:#fff; border:1px solid #E5E5E5; border-radius:10px; padding:13px 14px; margin-top:10px; font-size:14px; color:#333; line-height:1.5; cursor:pointer; }
+.qz-opt:active { background:#F7F7F7; }
+.qz-opt.active { border-color:#1a1a1a; background:#1a1a1a; color:#fff; font-weight:500; }
+.qz-opt .qz-opt-mark { width:18px; height:18px; border:1.5px solid #ccc; border-radius:50%; flex-shrink:0; margin-top:2px; box-sizing:border-box; }
+.qz-opt.active .qz-opt-mark { border-color:#fff; background: radial-gradient(circle at center, #fff 45%, transparent 50%); }
+.qz-foot { display:flex; gap:10px; padding:12px 16px; background:#fff; border-top:0.5px solid #E5E5E5; flex-shrink:0; }
+.qz-btn { flex:1; text-align:center; border-radius:22px; font-size:15px; font-weight:600; padding:11px 0; cursor:pointer; }
+.qz-btn.ghost { background:#F2F2F2; color:#333; }
+.qz-btn.primary { background:#1a1a1a; color:#fff; }
+.qz-btn.primary:active,.qz-btn.ghost:active { opacity:.8; }
+.qz-btn.disabled, .qz-btn[disabled] { opacity:.35; pointer-events:none; }
 </style>
 </head>
 <body>
@@ -755,19 +774,19 @@ body {
           </div>
           <div class="feat-name">生涯规划测评</div>
         </div>
-        <div class="feature-item-9" onclick="showToast('性格测评')">
+        <div class="feature-item-9" onclick="openScales('personality')">
           <div class="feature-icon-9 fi-orange">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
           </div>
           <div class="feat-name">性格测评</div>
         </div>
-        <div class="feature-item-9" onclick="showToast('兴趣测评')">
+        <div class="feature-item-9" onclick="openScales('interest')">
           <div class="feature-icon-9 fi-blue">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
           </div>
           <div class="feat-name">兴趣测评</div>
         </div>
-        <div class="feature-item-9" onclick="showToast('价值观测评')">
+        <div class="feature-item-9" onclick="openScales('value')">
           <div class="feature-icon-9 fi-green">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
           </div>
@@ -995,7 +1014,7 @@ body {
         </div>
         <div class="feat-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
       </div>
-      <div class="feat-card" onclick="showToast('性格测评')">
+      <div class="feat-card" onclick="openScales('personality')">
         <div class="feat-card-icon fi-orange">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
         </div>
@@ -1005,7 +1024,7 @@ body {
         </div>
         <div class="feat-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
       </div>
-      <div class="feat-card" onclick="showToast('兴趣测评')">
+      <div class="feat-card" onclick="openScales('interest')">
         <div class="feat-card-icon fi-blue">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
         </div>
@@ -1015,7 +1034,7 @@ body {
         </div>
         <div class="feat-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
       </div>
-      <div class="feat-card" onclick="showToast('价值观测评')">
+      <div class="feat-card" onclick="openScales('value')">
         <div class="feat-card-icon fi-green">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
         </div>
@@ -1086,15 +1105,7 @@ body {
         <div class="feat-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
       </div>
       <div class="section-title" style="margin-top: 8px;">测评报告</div>
-      <div class="card">
-        <div style="display:flex;align-items:center;justify-content:space-between;">
-          <div>
-            <div style="font-size:14px;font-weight:600;color:#1a1a1a;">性格测评报告</div>
-            <div style="font-size:12px;color:#999;margin-top:3px;">完成于 2026-07-22 · INTJ 建筑师型</div>
-          </div>
-          <span style="font-size:11px;background:#EEF2FF;color:#5B6EF5;padding:3px 10px;border-radius:10px;">查看报告</span>
-        </div>
-      </div>
+      <div id="assessReportList"></div>
     </div>
 
     <!-- ===== PROFILE PAGE ===== -->
@@ -2106,6 +2117,51 @@ body {
     </div>
   </div>
 
+  <!-- ===== 量表选择层（通用测评）===== -->
+  <div class="prediction-overlay" id="qzScalePage">
+    <div class="status-bar"><span class="time">9:41</span><div class="icons"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg><div class="battery"><div class="battery-fill"></div></div></div></div>
+    <div class="pred-header">
+      <div class="pred-header-back" onclick="qzCloseScales()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></div>
+      <span class="pred-header-title" id="qzScaleTitle">测评</span>
+      <div class="pred-header-close" style="opacity:0;pointer-events:none;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="M6 6l12 12"/></svg></div>
+    </div>
+    <div class="pred-body" id="qzScaleBody"></div>
+  </div>
+
+  <!-- ===== 逐题作答器（通用测评）===== -->
+  <div class="prediction-overlay" id="qzQuizPage">
+    <div class="status-bar"><span class="time">9:41</span><div class="icons"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg><div class="battery"><div class="battery-fill"></div></div></div></div>
+    <div class="pred-header">
+      <div class="pred-header-back" onclick="qzClose()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></div>
+      <span class="pred-header-title" id="qzQuizTitle">测评</span>
+      <div class="pred-header-close" style="opacity:0;pointer-events:none;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="M6 6l12 12"/></svg></div>
+    </div>
+    <div class="qz-progress-row">
+      <div class="qz-progress-track"><div class="qz-progress-fill" id="qzProgressFill"></div></div>
+      <div class="qz-progress-text" id="qzProgressText"></div>
+    </div>
+    <div class="pred-body" id="qzQuizBody"></div>
+    <div class="qz-foot">
+      <div class="qz-btn ghost" id="qzPrevBtn" onclick="qzPrev()">上一题</div>
+      <div class="qz-btn primary" id="qzNextBtn" onclick="qzNext()">下一题</div>
+    </div>
+  </div>
+
+  <!-- ===== 结果报告页（通用测评）===== -->
+  <div class="prediction-overlay" id="qzResultPage">
+    <div class="status-bar"><span class="time">9:41</span><div class="icons"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg><div class="battery"><div class="battery-fill"></div></div></div></div>
+    <div class="pred-header">
+      <div class="pred-header-back" onclick="qzCloseResult()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></div>
+      <span class="pred-header-title" id="qzResultTitle">测评结果</span>
+      <div class="pred-header-close" style="opacity:0;pointer-events:none;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="M6 6l12 12"/></svg></div>
+    </div>
+    <div class="pred-body" id="qzResultBody"></div>
+    <div class="qz-foot">
+      <div class="qz-btn ghost" onclick="qzRestart()">重新测试</div>
+      <div class="qz-btn primary" onclick="qzCloseResult()">完成</div>
+    </div>
+  </div>
+
   <!-- Toast -->
   <div class="toast" id="toast"></div>
 
@@ -2132,6 +2188,7 @@ body {
     tabs.forEach(function(tab) { tab.classList.remove('active'); });
     document.getElementById('page-assess').classList.add('active');
     document.querySelector('.content-area').scrollTop = 0;
+    if (typeof renderAssessReports === 'function') renderAssessReports();
   };
 
   window.openChat = function() {
@@ -2326,6 +2383,192 @@ body {
   window.closeVersionDialog = function() {
     document.getElementById('verOverlay').classList.remove('show');
     document.getElementById('versionDialog').classList.remove('show');
+  };
+
+  // ================= 通用测评引擎 =================
+  var QZ_CATS = {
+    personality: { name: '性格测评', tagline: '探索你的性格特质、偏好与行为倾向，找到更自洽的成长与职业方向。' },
+    interest:    { name: '兴趣测评', tagline: '发现你真正享受的活动领域，定位与之匹配的职业方向。' },
+    value:       { name: '价值观测评', tagline: '看清驱动你的核心价值，找到内在认同的工作与生活重心。' }
+  };
+  var SCALES = [];
+  function qzScaleById(id) { for (var i=0;i<SCALES.length;i++){ if(SCALES[i].id===id) return SCALES[i]; } return null; }
+  function qzEsc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+
+  window.openScales = function(cat) {
+    var meta = QZ_CATS[cat]; if (!meta) return;
+    document.getElementById('qzScaleTitle').textContent = meta.name;
+    var body = document.getElementById('qzScaleBody');
+    var html = '<div class="qz-cat-desc">' + qzEsc(meta.tagline) + '</div>';
+    var list = SCALES.filter(function(s){ return s.cat === cat; });
+    if (!list.length) { html += '<div class="card" style="text-align:center;color:#999;font-size:13px;padding:26px 16px;">量表整理中，敬请期待</div>'; }
+    list.forEach(function(s){
+      html += '<div class="feat-card" onclick="openQuiz(\'' + s.id + '\')">' +
+        '<div class="feat-card-icon ' + s.color + '">' + s.icon + '</div>' +
+        '<div class="feat-card-body"><div class="feat-card-title">' + qzEsc(s.name) + '</div>' +
+        '<div class="feat-card-desc">' + qzEsc(s.desc) + ' · 约 ' + s.minutes + ' 分钟</div></div>' +
+        '<div class="feat-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>' +
+        '</div>';
+    });
+    body.innerHTML = html;
+    document.getElementById('qzScalePage').classList.add('show');
+    document.querySelector('.content-area').scrollTop = 0;
+  };
+  window.qzCloseScales = function() {
+    document.getElementById('qzScalePage').classList.remove('show');
+  };
+
+  // ---- 逐题作答器 ----
+  var qzSession = null;
+  window.openQuiz = function(id) {
+    var s = qzScaleById(id); if (!s) return;
+    qzSession = { s: s, answers: {}, idx: 0 };
+    qzRenderQuestion();
+    document.getElementById('qzScalePage').classList.remove('show');
+    document.getElementById('qzQuizPage').classList.add('show');
+  };
+  window.qzClose = function() {
+    qzSession = null;
+    document.getElementById('qzQuizPage').classList.remove('show');
+  };
+  function qzAnswered(){ return !!(qzSession && qzSession.answers[qzSession.idx] != null); }
+  function qzRenderQuestion() {
+    if (!qzSession) return;
+    var s = qzSession.s, qs = s.questions, idx = qzSession.idx, q = qs[idx];
+    document.getElementById('qzQuizTitle').textContent = s.name;
+    document.getElementById('qzProgressText').textContent = '第 ' + (idx+1) + ' / ' + qs.length + ' 题';
+    document.getElementById('qzProgressFill').style.width = (((idx+1)/qs.length)*100) + '%';
+    var body = document.getElementById('qzQuizBody');
+    var sel = qzSession.answers[idx];
+    var html = '<div class="qz-question-num">第 ' + (idx+1) + ' 题</div>' +
+      '<div class="qz-question-text">' + qzEsc(q.text) + '</div>';
+    q.opts.forEach(function(o, oi){
+      html += '<div class="qz-opt' + (sel===oi ? ' active' : '') + '" onclick="qzAnswer(' + oi + ')">' +
+        '<span class="qz-opt-mark"></span><span>' + qzEsc(o) + '</span></div>';
+    });
+    body.innerHTML = html;
+    body.scrollTop = 0;
+    var prevBtn = document.getElementById('qzPrevBtn');
+    var nextBtn = document.getElementById('qzNextBtn');
+    prevBtn.classList.toggle('disabled', idx === 0);
+    var isLast = (idx === qs.length - 1);
+    nextBtn.textContent = isLast ? '提交并查看结果' : '下一题';
+    nextBtn.onclick = isLast ? qzSubmit : qzNext;
+  }
+  window.qzAnswer = function(oi) { if (!qzSession) return; qzSession.answers[qzSession.idx] = oi; qzRenderQuestion(); };
+  window.qzPrev = function() { if (!qzSession || qzSession.idx === 0) return; qzSession.idx--; qzRenderQuestion(); };
+  window.qzNext = function() { if (!qzSession) return; if (!qzAnswered()) { showToast('请先作答本题'); return; } qzSession.idx++; qzRenderQuestion(); };
+  window.qzSubmit = function() {
+    if (!qzSession) return;
+    if (!qzAnswered()) { showToast('请先作答本题'); return; }
+    var qs = qzSession.s.questions, n = 0;
+    qs.forEach(function(_, i){ if (qzSession.answers[i] == null) n++; });
+    if (n > 0) { showToast('还有 ' + n + ' 题未作答'); return; }
+    var s = qzSession.s, answers = qzSession.answers;
+    var res = s.scoring(answers);
+    var out = s.renderer(res);
+    qzSession = null;
+    qzRenderResult(s, out);
+    qzSaveReport(s, out);
+    document.getElementById('qzQuizPage').classList.remove('show');
+    document.getElementById('qzResultPage').classList.add('show');
+    document.getElementById('qzResultBody').scrollTop = 0;
+  };
+  window.qzRestart = function() {
+    document.getElementById('qzResultPage').classList.remove('show');
+    document.getElementById('qzScalePage').classList.add('show');
+  };
+  window.qzCloseResult = function() {
+    document.getElementById('qzResultPage').classList.remove('show');
+    document.getElementById('qzScalePage').classList.add('show');
+    if (typeof renderAssessReports === 'function') renderAssessReports();
+  };
+
+  // ---- 结果渲染与报告落库 ----
+  function qzRenderResult(s, out) {
+    document.getElementById('qzResultTitle').textContent = s.name + ' · 测评结果';
+    var h = '';
+    h += '<div class="card"><div style="font-size:22px;font-weight:800;color:#1a1a1a;' + (out.primaryColor ? 'color:' + out.primaryColor : '') + '">' + qzEsc(out.primary) + '</div>' +
+      (out.primarySub ? '<div style="font-size:13px;color:#666;margin-top:6px;line-height:1.7;">' + qzEsc(out.primarySub) + '</div>' : '') +
+      (out.badge ? '<div style="display:inline-block;margin-top:10px;font-size:11px;background:#EEF2FF;color:#5B6EF5;padding:4px 12px;border-radius:12px;">' + qzEsc(out.badge) + '</div>' : '') +
+      '</div>';
+    (out.bars || []).forEach(function(b){
+      var pa = Math.round((b.a/(b.a+b.b))*100) || 50;
+      h += '<div class="card"><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;">' +
+        '<span style="font-size:14px;font-weight:600;color:#1a1a1a;">' + qzEsc(b.name) + '</span>' +
+        '<span style="font-size:11px;color:#999;">' + qzEsc(b.aLabel) + ' ' + pa + '% · ' + (100-pa) + '% ' + qzEsc(b.bLabel) + '</span></div>' +
+        '<div style="display:flex;height:8px;border-radius:4px;overflow:hidden;background:#EEF2FF;">' +
+        '<div style="width:' + pa + '%;background:#5B6EF5;"></div>' +
+        '<div style="width:' + (100-pa) + '%;background:#FFE1D6;"></div></div></div>';
+    });
+    (out.list || []).forEach(function(it){
+      h += '<div class="card"><div style="display:flex;justify-content:space-between;align-items:center;">' +
+        '<div><div style="font-size:14px;font-weight:600;color:#1a1a1a;">' + qzEsc(it.title) + '</div>' +
+        (it.note ? '<div style="font-size:12px;color:#999;margin-top:3px;">' + qzEsc(it.note) + '</div>' : '') + '</div>' +
+        '<span style="font-size:14px;font-weight:700;color:#1a1a1a;">' + qzEsc(it.value) + '</span></div></div>';
+    });
+    (out.sections || []).forEach(function(sec){
+      h += '<div class="card"><div style="font-size:14px;font-weight:700;color:#1a1a1a;margin-bottom:6px;">' + qzEsc(sec.title) + '</div>' + sec.html + '</div>';
+    });
+    if (out.advice && out.advice.length) {
+      var adv = '<div class="card"><div style="font-size:14px;font-weight:700;color:#1a1a1a;margin-bottom:8px;">下一步行动建议</div>';
+      out.advice.forEach(function(a){ adv += '<div style="font-size:13px;color:#444;line-height:1.6;padding:6px 0;border-bottom:0.5px solid #F0F0F0;">· ' + qzEsc(a) + '</div>'; });
+      h += adv + '</div>';
+    }
+    h += '<div style="text-align:center;font-size:11px;color:#bbb;padding:8px 16px 4px;">本结果基于整理版量表，仅供参考，不构成专业测评结论。</div>';
+    document.getElementById('qzResultBody').innerHTML = h;
+  }
+  function qzSaveReport(s, out) {
+    try {
+      var meta = (typeof s.metaOf === 'function') ? s.metaOf(out) : { summary: out.primary };
+      var arr = JSON.parse(localStorage.getItem('zj_assess_reports') || '[]');
+      var d = new Date(), mm = ('0'+(d.getMonth()+1)).slice(-2), dd = ('0'+d.getDate()).slice(-2);
+      arr.unshift({ scaleId: s.id, name: s.name, summary: meta.summary || '', meta: meta.meta || '', doneAt: d.getFullYear() + '-' + mm + '-' + dd });
+      if (arr.length > 20) arr.length = 20;
+      localStorage.setItem('zj_assess_reports', JSON.stringify(arr));
+    } catch(e) {}
+  }
+
+  // ---- 临时验证用 fixture（Task4 将替换为正式 MBTI）----
+  SCALES.push({
+    id:'_fixture', cat:'personality', name:'(临时)MBTI 采样', color:'fi-orange',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>',
+    desc: '作答器交互验证样例', minutes: 1,
+    questions: [
+      { text: '在社交聚会后，你通常感到？', opts: ['A. 更想继续和别人待在一起','B. 需要独处充电'] },
+      { text: '做决定时，你更常依据？', opts: ['A. 逻辑与分析','B. 价值观与对人的影响'] },
+      { text: '你更喜欢哪种节奏？', opts: ['A. 有计划、按清单推进','B. 随灵感即兴发挥'] },
+      { text: '阅读时，你更关注？', opts: ['A. 具体的事实与细节','B. 背后的含义与可能性'] }
+    ],
+    scoring: function(a){ return { dims:{ EI:(a[0]===0?1:-1), TF:(a[1]===0?1:-1), JP:(a[2]===0?1:-1), NS:(a[3]===1?1:-1) } }; },
+    renderer: function(){ return { primary: '样例结果', primarySub: 'fixture 用于验证作答器交互，随后将被正式题库替换。', badge: '整理版', bars: [] }; },
+    metaOf: function(){ return { summary: '样例', meta: '' }; }
+  });
+
+  // ---- 测评报告列表（测评页动态区块）----
+  window.renderAssessReports = function() {
+    var box = document.getElementById('assessReportList'); if (!box) return;
+    var arr = [];
+    try { arr = JSON.parse(localStorage.getItem('zj_assess_reports') || '[]'); } catch(e){}
+    if (!arr.length) {
+      box.innerHTML = '<div class="card" style="text-align:center;color:#999;font-size:13px;line-height:1.8;padding:24px 16px;">完成测评后，你的报告会显示在这里</div>';
+      return;
+    }
+    var h = '';
+    arr.slice(0,5).forEach(function(r){
+      h += '<div class="card" style="cursor:pointer;" onclick="reopenReport(\'' + qzEsc(r.scaleId) + '\')">' +
+        '<div style="display:flex;align-items:center;justify-content:space-between;">' +
+        '<div><div style="font-size:14px;font-weight:600;color:#1a1a1a;">' + qzEsc(r.name) + '</div>' +
+        '<div style="font-size:12px;color:#999;margin-top:3px;">' + qzEsc(r.doneAt) + ' · ' + qzEsc(r.summary || '') + '</div></div>' +
+        '<span style="font-size:11px;background:#EEF2FF;color:#5B6EF5;padding:3px 10px;border-radius:10px;">再测一次</span>' +
+        '</div></div>';
+    });
+    box.innerHTML = h;
+  };
+  window.reopenReport = function(scaleId) {
+    var s = qzScaleById(scaleId); if (!s) { showToast('该量表已下线'); return; }
+    document.getElementById('qzScalePage').classList.add('show');
+    openQuiz(scaleId);
   };
 
   setTimeout(openVersionDialog, 500);

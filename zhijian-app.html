@@ -2693,8 +2693,138 @@ body {
     openQuiz(scaleId);
   };
 
-  setTimeout(openVersionDialog, 500);
+  // ---- 霍兰德职业兴趣测评（RIASEC × 10 = 60）----
+  var HOLLAND_TYPES = [
+    { code:'R', name:'现实型', kw:'动手 · 工具 · 户外', desc:'喜欢与实物、工具、机械设备打交道，做事踏实，偏好可落地的实操工作。' },
+    { code:'I', name:'研究型', kw:'分析 · 探索 · 钻研', desc:'喜欢观察、分析与解决抽象问题，享受钻研原理、探索未知的乐趣。' },
+    { code:'A', name:'艺术型', kw:'创造 · 美感 · 表达', desc:'喜欢借助文字、图像、声音表达自我，追求美感、创意与自由表达。' },
+    { code:'S', name:'社会型', kw:'助人 · 交往 · 引导', desc:'喜欢与人打交道，帮助、教导、服务他人，重视人际互动与集体氛围。' },
+    { code:'E', name:'企业型', kw:'影响 · 组织 · 说服', desc:'喜欢领导、说服与影响他人，乐于组织资源、承担风险去达成目标。' },
+    { code:'C', name:'常规型', kw:'规则 · 细致 · 秩序', desc:'喜欢按明确规则与流程处理事务，细心可靠，擅长让事情井井有条。' }
+  ];
+  var HOLLAND_CAREER = {
+    R:['机械/电气工程','建筑与施工','运动教练','农林牧渔','产品制造','烹饪餐饮','物流运输'],
+    I:['科学研究','数据分析','研发工程师','医生/医药','人工智能/算法','经济与金融研究','学术'],
+    A:['视觉/UI设计','内容创作','插画摄影','音乐艺术','影视传媒','文案策划','空间设计'],
+    S:['教育培训','心理咨询','医护健康','人力资源','社会工作','客户成功','公益组织'],
+    E:['销售/BD','市场营销','项目管理','创业经营','投行咨询','商务谈判','企业管理'],
+    C:['财务会计','审计风控','行政文秘','供应链管理','数据分析师','档案信息管理','运营支持']
+  };
+  SCALES.push({
+    id:'holland', cat:'interest', name:'霍兰德职业兴趣测评', color:'fi-blue',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
+    desc: '60 项 · 6 大兴趣类型', minutes: 6,
+    questions: [
+      { text:'喜欢做：修理或组装电器、电脑主机', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：栽种花草、打理院子', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：使用锯子、电钻等做木工活', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：拼装车模、航模等模型', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：操作机器或驾驶车辆', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：自己修好一辆自行车或小家电', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：参加需要体力的户外活动', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：皮具、木艺、陶艺等手工', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：整理重物、布置场地等体力活', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：下厨钻研、尝试一道硬菜', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：解数学或逻辑谜题', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：阅读科普书，把原理弄明白', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：化学、物理等小实验', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：观察星象、研究动植物习性', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：分析数据、寻找其中的规律', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：上网把一个疑问查到彻底明白', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：学习一门新技术的底层原理', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：撰写研究报告或技术文章', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：研究人工智能等前沿话题', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：花上几小时独自琢磨抽象问题', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：画画、涂鸦或数字插画', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：写诗、小说或记录灵感文字', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：弹奏乐器或练唱', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：摄影拍照并后期调色', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：设计海报、文创或PPT的视觉', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：排练话剧、跳舞或上台表演', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：做手账、拼贴等创意手工', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：逛美术馆、看设计艺术展', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：编曲、写歌或给视频做配乐', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：用心布置房间的氛围与软装', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：帮朋友分析、解开心里的结', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：报名参加志愿或公益活动', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：给同学讲题、带新人入门', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：组织班级或社团的团建活动', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：安静地倾听别人倾诉', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：帮忙调解朋友之间的误会', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：照顾老人或小孩', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：做活动主持或展馆讲解', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：破冰、把一群人带热络', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：分享经验、帮助他人成长', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：牵头策划并落地一场活动或比赛', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：说服别人接受我的方案', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：谈合作、谈价格、与人谈判', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：琢磨一门小生意的点子与模式', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：负责一个项目、安排大家分工', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：把一个产品/想法推广出去', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：参加竞聘演讲或创业路演', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：规划业务的增长与扩张', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：协调多方资源把事情做成', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：主导一场商务讨论或会议', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：整理台账、做明细清单', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：核对数据、查找其中的差异', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：制作报表、整理归档', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：制定并严格执行日程表', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：按标准流程处理行政事务', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：记账、管理收支账目', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：录入并校对大量信息', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：整理文件、做好档案管理', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：处理报销、办证等事务性工作', opts:['喜欢','不喜欢'] },
+      { text:'喜欢做：维护系统数据、管理文档版本', opts:['喜欢','不喜欢'] }
+    ],
+    scoring: function(a){
+      var n = [0,0,0,0,0,0], i;
+      for (i=0;i<60;i++){ if(a[i]===0) n[Math.floor(i/10)]++; }
+      var order = [0,1,2,3,4,5].sort(function(x,y){ return (n[y]-n[x]) || (x-y); });
+      return { counts:n, order:order, code: order.slice(0,3).map(function(o){return HOLLAND_TYPES[o].code;}).join('') };
+    },
+    renderer: function(res){
+      var top = res.order[0];
+      var t1 = HOLLAND_TYPES[top];
+      var codeName = res.code.split('').map(function(c){ var t=HOLLAND_TYPES.filter(function(x){return x.code===c;})[0]; return t.name; }).join(' · ');
+      var combos = ['R','I','A','S','E','C'];
+      var hollandRing = ['R','I','A','S','E','C'];
+      var comboNote = '';
+      if (res.order.length >= 2) {
+        var d = Math.abs(hollandRing.indexOf(res.order[1]) - hollandRing.indexOf(top));
+        comboNote = (d === 1 || d === 5)
+          ? '你的前两型相邻，兴趣方向比较聚焦、连贯，容易找到直接匹配的职业方向。'
+          : '你的前两型距离较远，说明你兴趣面广、兼顾不同性质的活动，职业上更适合复合型岗位或先做取舍。';
+      }
+      var secHtml = '<div style="font-size:13px;color:#444;line-height:1.9;">' + t1.desc + '</div>';
+      secHtml += '<div style="margin-top:8px;font-size:13px;color:#666;line-height:1.9;">' + comboNote + '</div>';
+      var jobs = [];
+      res.code.split('').forEach(function(c){
+        var t = HOLLAND_TYPES.filter(function(x){return x.code===c;})[0];
+        var list = HOLLAND_CAREER[c].slice(0,4).join('、');
+        jobs.push('<div style="font-size:13px;color:#444;line-height:1.8;margin-top:4px;"><b>' + t.code + ' ' + t.name + '</b>：' + list + ' 等</div>');
+      });
+      var listRows = HOLLAND_TYPES.map(function(t, i){
+        var v = res.counts[i];
+        var note = i===top ? '你的主导兴趣' : (v>=7?'较高':(v>=4?'一般':'偏低'));
+        return { title: t.code + ' ' + t.name + ' · ' + t.kw, value: v + '/10', note: note };
+      });
+      return {
+        primary: res.code,
+        primarySub: '主导兴趣：' + t1.name + '（' + codeName + '）',
+        badge: '霍兰德三码 · RIASEC',
+        list: listRows,
+        sections: [
+          { title:'兴趣解读', html: secHtml },
+          { title:'可参考的职业方向', html: jobs.join('') }
+        ],
+        advice: ['把三码理解为你适合的兴趣组合：前两码越邻近，方向越聚焦。','兴趣 ≠ 能力：先凭兴趣框定大方向，再用能力与技能补齐可行性。','可以结合 MBTI 与职业价值观结果，进一步缩小目标岗位范围。']
+      };
+    },
+    metaOf: function(out){ return { summary: out.primary, meta: (out.primarySub||'').replace('主导兴趣：','') }; }
+  });
 
+
+  setTimeout(openVersionDialog, 500);
   cpRenderRank();
   cpUpdateProgress();
 })();

@@ -2824,6 +2824,106 @@ body {
   });
 
 
+  // ---- 舒伯职业价值观测评（15 维 × 3 = 45）----
+  var WVI_LIKERT = ['非常不赞同','不赞同','中立','赞同','非常赞同'];
+  var WVI_VALUES = [
+    { name:'成就感', core:'从工作中看到成果、达成有挑战的目标' },
+    { name:'物质保障', core:'收入稳定，生活无忧、有基本抗风险能力' },
+    { name:'生活方式', core:'工作与生活平衡，节奏可控、留白给生活' },
+    { name:'社会声望', core:'职业被社会认可、受人尊重' },
+    { name:'工作环境', core:'在舒适、安全、整洁的条件中工作' },
+    { name:'同事关系', core:'与同事融洽相处、氛围友好互助' },
+    { name:'经济报酬', core:'获得与付出匹配、可观的回报' },
+    { name:'社会交往', core:'工作中能与不同类型的人交流往来' },
+    { name:'智力刺激', core:'工作带来持续的脑力挑战与新知识' },
+    { name:'利他主义', core:'能帮助他人、为社会做出贡献' },
+    { name:'创造性', core:'能发挥创意、做出新的东西' },
+    { name:'独立性', core:'能自主决策、按自己的方式做事' },
+    { name:'多样性', core:'工作内容丰富多变、常有新任务' },
+    { name:'安全感', core:'职业稳定、发展前景可预期' },
+    { name:'管理权力', core:'能管理团队、影响他人与事务走向' }
+  ];
+  SCALES.push({
+    id:'wvi', cat:'value', name:'舒伯职业价值观测评', color:'fi-green',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>',
+    desc: '45 题 · 15 项价值维度', minutes: 6,
+    questions: [
+      { text:'在工作中，能从成果里看到自己努力的回报，对我而言很重要', opts: WVI_LIKERT },
+      { text:'在工作中，能去达成有挑战、有分量的目标，对我而言很重要', opts: WVI_LIKERT },
+      { text:'在工作中，做的事情能被看见、被认可，对我而言很重要', opts: WVI_LIKERT },
+      { text:'在工作中，收入能让我和家人有稳定的生活保障，对我而言很重要', opts: WVI_LIKERT },
+      { text:'在工作中，不必为基本开销而担忧，对我而言很重要', opts: WVI_LIKERT },
+      { text:'在工作中，有稳定的福利和抗风险能力，对我而言很重要', opts: WVI_LIKERT },
+      { text:'在工作中，工作之后仍有充足时间留给生活，对我而言很重要', opts: WVI_LIKERT },
+      { text:'在工作中，能自己掌控工作与生活的节奏，对我而言很重要', opts: WVI_LIKERT },
+      { text:'在工作中，下班后能完全放下工作，对我而言很重要', opts: WVI_LIKERT },
+      { text:'在工作中，职业头衔受到周围人尊重，对我而言很重要', opts: WVI_LIKERT },
+      { text:'在工作中，所在单位在社会上有名望，对我而言很重要', opts: WVI_LIKERT },
+      { text:'在工作中，提起自己的工作会让人羡慕，对我而言很重要', opts: WVI_LIKERT },
+      { text:'在工作中，能在明亮整洁、设备齐全的条件下工作，对我而言很重要', opts: WVI_LIKERT },
+      { text:'在工作中，工作条件舒适、作息规律，对我而言很重要', opts: WVI_LIKERT },
+      { text:'在工作中，办公地点环境好、通勤方便，对我而言很重要', opts: WVI_LIKERT },
+      { text:'在工作中，与同事相处融洽、互相支持，对我而言很重要', opts: WVI_LIKERT },
+      { text:'在工作中，团队氛围轻松、没有内耗，对我而言很重要', opts: WVI_LIKERT },
+      { text:'在工作中，能遇到聊得来、可深交的同事，对我而言很重要', opts: WVI_LIKERT },
+      { text:'在工作中，获得与能力付出相匹配的高收入，对我而言很重要', opts: WVI_LIKERT },
+      { text:'在工作中，报酬水平在同龄人中处于领先，对我而言很重要', opts: WVI_LIKERT },
+      { text:'在工作中，有持续加薪与绩效回报的空间，对我而言很重要', opts: WVI_LIKERT },
+      { text:'在工作中，能认识很多不同的人，对我而言很重要', opts: WVI_LIKERT },
+      { text:'在工作中，有较多外出拜访与社交的机会，对我而言很重要', opts: WVI_LIKERT },
+      { text:'在工作中，常从与人打交道中获得乐趣，对我而言很重要', opts: WVI_LIKERT },
+      { text:'在工作中，任务能持续带来新鲜知识，对我而言很重要', opts: WVI_LIKERT },
+      { text:'在工作中，常要动脑解决复杂问题，对我而言很重要', opts: WVI_LIKERT },
+      { text:'在工作中，能接触行业前沿、保持学习，对我而言很重要', opts: WVI_LIKERT },
+      { text:'在工作中，能切实帮助到需要帮助的人，对我而言很重要', opts: WVI_LIKERT },
+      { text:'在工作中，做对社会、对他人有意义的事，对我而言很重要', opts: WVI_LIKERT },
+      { text:'在工作中，工作成果能让更多人受益，对我而言很重要', opts: WVI_LIKERT },
+      { text:'在工作中，有机会发挥自己的创意，对我而言很重要', opts: WVI_LIKERT },
+      { text:'在工作中，能设计并创造出新的东西，对我而言很重要', opts: WVI_LIKERT },
+      { text:'在工作中，不被条条框框限制、可尝试新做法，对我而言很重要', opts: WVI_LIKERT },
+      { text:'在工作中，能自主决定怎么做、如何安排，对我而言很重要', opts: WVI_LIKERT },
+      { text:'在工作中，不必事事请示、拥有充分授权，对我而言很重要', opts: WVI_LIKERT },
+      { text:'在工作中，能按自己的方式独立完成任务，对我而言很重要', opts: WVI_LIKERT },
+      { text:'在工作中，工作内容丰富、常换新花样，对我而言很重要', opts: WVI_LIKERT },
+      { text:'在工作中，任务性质多变、不枯燥重复，对我而言很重要', opts: WVI_LIKERT },
+      { text:'在工作中，有机会尝试不同职能的角色，对我而言很重要', opts: WVI_LIKERT },
+      { text:'在工作中，职位稳定、不太担心被裁，对我而言很重要', opts: WVI_LIKERT },
+      { text:'在工作中，职业发展路径清晰可预期，对我而言很重要', opts: WVI_LIKERT },
+      { text:'在工作中，组织经营稳健、制度完善，对我而言很重要', opts: WVI_LIKERT },
+      { text:'在工作中，有机会带领团队、管理他人，对我而言很重要', opts: WVI_LIKERT },
+      { text:'在工作中，能参与重要决策、影响方向，对我而言很重要', opts: WVI_LIKERT },
+      { text:'在工作中，能按自己的思路推动一件事，对我而言很重要', opts: WVI_LIKERT }
+    ],
+    scoring: function(a){
+      var sums = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], i;
+      for (i=0;i<45;i++){ sums[Math.floor(i/3)] += (a[i]==null ? 0 : (a[i]+1)); }
+      var order = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14].sort(function(x,y){ return (sums[y]-sums[x]) || (x-y); });
+      return { sums: sums, order: order };
+    },
+    renderer: function(res){
+      var topIdx = res.order.slice(0,3);
+      var t1 = WVI_VALUES[res.order[0]];
+      var html = topIdx.map(function(idx, k){
+        var v = WVI_VALUES[idx];
+        return '<div style="font-size:13px;color:#444;line-height:1.7;padding:8px 0;border-bottom:0.5px solid #F0F0F0;">' +
+          '<b>第' + (k+1) + ' · ' + v.name + '</b><br><span style="color:#999;">' + v.core + '</span></div>';
+      }).join('');
+      var listRows = WVI_VALUES.map(function(v, i){
+        var star = res.order.indexOf(i) === 0 ? '（最看重）' : (res.order.indexOf(i) < 3 ? '（Top3）' : '');
+        return { title: v.name, value: res.sums[i] + '/15', note: v.core + star };
+      });
+      return {
+        primary: t1.name,
+        primarySub: '你最看重的职业价值：' + topIdx.map(function(i){return WVI_VALUES[i].name;}).join('、'),
+        badge: '舒伯职业价值观 · 15 维',
+        list: listRows,
+        sections: [ { title:'Top 价值解读', html: html } ],
+        advice: ['拿这份排序对照当前机会：优先满足排名靠前的 2-3 项，最容易有长久的内在动力。','价值观会随人生阶段变化，建议每隔一两年重测一次。','把价值观和 MBTI/霍兰德结果交叉看：它们分别回答“适合什么”与“为什么想坚持”。']
+      };
+    },
+    metaOf: function(out){ return { summary: out.primarySub.replace('你最看重的职业价值：',''), meta: out.primary }; }
+  });
+
   setTimeout(openVersionDialog, 500);
   cpRenderRank();
   cpUpdateProgress();

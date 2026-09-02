@@ -2455,7 +2455,17 @@ body {
     nextBtn.textContent = isLast ? '提交并查看结果' : '下一题';
     nextBtn.onclick = isLast ? qzSubmit : qzNext;
   }
-  window.qzAnswer = function(oi) { if (!qzSession) return; qzSession.answers[qzSession.idx] = oi; qzRenderQuestion(); };
+  window.qzAnswer = function(oi) {
+    if (!qzSession) return;
+    qzSession.answers[qzSession.idx] = oi;
+    qzRenderQuestion();
+    var s = qzSession, idx = qzSession.idx, qs2 = qzSession.s.questions;
+    if (idx < qs2.length - 1) {
+      setTimeout(function(){
+        if (qzSession && qzSession === s && qzSession.idx === idx && qzSession.answers[idx] != null) qzNext();
+      }, 260);
+    }
+  };
   window.qzPrev = function() { if (!qzSession || qzSession.idx === 0) return; qzSession.idx--; qzRenderQuestion(); };
   window.qzNext = function() { if (!qzSession) return; if (!qzAnswered()) { showToast('请先作答本题'); return; } qzSession.idx++; qzRenderQuestion(); };
   window.qzSubmit = function() {

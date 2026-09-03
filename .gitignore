@@ -1,0 +1,8 @@
+.playwright-mcp/
+*.png
+*.jpg
+
+# 本地开发工具与产物，不需要提交
+.trae-html-share-packages/
+.claude/settings.local.json
+_serve.js

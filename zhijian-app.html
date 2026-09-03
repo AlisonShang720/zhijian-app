@@ -195,6 +195,22 @@ body {
 }
 .sub-title { font-size: 20px; font-weight: 700; color: #1a1a1a; }
 
+/* 统计卡片行（面试中心 / 能力测评页顶部） */
+.stat-row { display: flex; gap: 12px; margin-bottom: 12px; }
+.stat-card {
+  flex: 1; background: #fff; border-radius: 12px; padding: 16px;
+  display: flex; flex-direction: column; align-items: flex-start;
+  min-width: 0; box-sizing: border-box;
+}
+.stat-num { font-size: 26px; font-weight: 800; color: #1a1a1a; line-height: 1.15; }
+.stat-label { font-size: 12px; color: #999; margin-top: 4px; }
+.stat-card.highlight { background: #EEF2FF; }
+.stat-card.highlight .stat-num { color: #5B6EF5; }
+.stat-card.highlight .stat-label { color: #7B8AE8; }
+.stat-card.highlight2 { background: #EDF8F0; }
+.stat-card.highlight2 .stat-num { color: #34B76F; }
+.stat-card.highlight2 .stat-label { color: #6FC494; }
+
 .feat-card {
   background: #fff; border-radius: 12px; padding: 16px; margin-bottom: 10px;
   cursor: pointer; transition: all 0.15s; display: flex; align-items: center; gap: 14px;
@@ -702,6 +718,24 @@ body {
 .qz-opt.active { border-color:#1a1a1a; background:#1a1a1a; color:#fff; font-weight:500; }
 .qz-opt .qz-opt-mark { width:18px; height:18px; border:1.5px solid #ccc; border-radius:50%; flex-shrink:0; margin-top:2px; box-sizing:border-box; }
 .qz-opt.active .qz-opt-mark { border-color:#fff; background: radial-gradient(circle at center, #fff 45%, transparent 50%); }
+.qz-opt.qz-multi-mark .qz-opt-mark { border-radius:4px; }
+.qz-opt.qz-multi-mark.active .qz-opt-mark { background:#fff; border-color:#fff; border-radius:4px; }
+.qz-multi-hint { font-size:12px; color:#999; margin:12px 0 2px; text-align:center; }
+.qz-alloc-hint { font-size:12px; font-weight:600; margin:14px 0 4px; color:#999; }
+.qz-alloc-row {
+  display:flex; align-items:center; gap:10px; background:#fff; border:1px solid #E5E5E5;
+  border-radius:10px; padding:10px 12px; margin-top:10px;
+}
+.qz-alloc-label { flex:1; font-size:13px; color:#333; line-height:1.5; }
+.qz-alloc-ctrl { display:flex; align-items:center; gap:8px; flex-shrink:0; }
+.qz-alloc-btn {
+  width:28px; height:28px; border-radius:8px; background:#F2F2F2; color:#1a1a1a;
+  display:flex; align-items:center; justify-content:center; font-size:17px; font-weight:700;
+  cursor:pointer; user-select:none;
+}
+.qz-alloc-btn:active { background:#e6e6e6; }
+.qz-alloc-btn.disabled { opacity:.3; pointer-events:none; }
+.qz-alloc-num { min-width:20px; text-align:center; font-size:15px; font-weight:700; color:#1a1a1a; }
 .qz-foot { display:flex; gap:10px; padding:12px 16px; background:#fff; border-top:0.5px solid #E5E5E5; flex-shrink:0; }
 .qz-btn { flex:1; text-align:center; border-radius:22px; font-size:15px; font-weight:600; padding:11px 0; cursor:pointer; }
 .qz-btn.ghost { background:#F2F2F2; color:#333; }
@@ -792,37 +826,37 @@ body {
           </div>
           <div class="feat-name">价值观测评</div>
         </div>
-        <div class="feature-item-9" onclick="showToast('情商测评')">
+        <div class="feature-item-9" onclick="openScales('eq')">
           <div class="feature-icon-9 fi-purple">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" opacity="0.4"/></svg>
           </div>
           <div class="feat-name">情商测评</div>
         </div>
-        <div class="feature-item-9" onclick="showToast('领导力测评')">
+        <div class="feature-item-9" onclick="openScales('leadership')">
           <div class="feature-icon-9 fi-amber">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           </div>
           <div class="feat-name">领导力测评</div>
         </div>
-        <div class="feature-item-9" onclick="showToast('压力/心理健康测评')">
+        <div class="feature-item-9" onclick="openScales('stress')">
           <div class="feature-icon-9 fi-rose">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 6v6l4 2"/></svg>
           </div>
           <div class="feat-name" style="font-size:11px;">压力/心理<br>健康测评</div>
         </div>
-        <div class="feature-item-9" onclick="showToast('学习风格测评')">
+        <div class="feature-item-9" onclick="openScales('learning')">
           <div class="feature-icon-9 fi-teal">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
           </div>
           <div class="feat-name">学习风格测评</div>
         </div>
-        <div class="feature-item-9" onclick="showToast('团队角色测评')">
+        <div class="feature-item-9" onclick="openScales('teamrole')">
           <div class="feature-icon-9 fi-pink">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           </div>
           <div class="feat-name">团队角色测评</div>
         </div>
-        <div class="feature-item-9" onclick="showToast('能力与潜力测评')">
+        <div class="feature-item-9" onclick="openScales('ability')">
           <div class="feature-icon-9 fi-slate">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
           </div>
@@ -1044,7 +1078,7 @@ body {
         </div>
         <div class="feat-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
       </div>
-      <div class="feat-card" onclick="showToast('情商测评')">
+      <div class="feat-card" onclick="openScales('eq')">
         <div class="feat-card-icon fi-purple">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
         </div>
@@ -1054,7 +1088,7 @@ body {
         </div>
         <div class="feat-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
       </div>
-      <div class="feat-card" onclick="showToast('领导力测评')">
+      <div class="feat-card" onclick="openScales('leadership')">
         <div class="feat-card-icon fi-amber">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
@@ -1064,7 +1098,7 @@ body {
         </div>
         <div class="feat-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
       </div>
-      <div class="feat-card" onclick="showToast('压力/心理健康测评')">
+      <div class="feat-card" onclick="openScales('stress')">
         <div class="feat-card-icon fi-rose">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 6v6l4 2"/></svg>
         </div>
@@ -1074,7 +1108,7 @@ body {
         </div>
         <div class="feat-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
       </div>
-      <div class="feat-card" onclick="showToast('学习风格测评')">
+      <div class="feat-card" onclick="openScales('learning')">
         <div class="feat-card-icon fi-teal">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
         </div>
@@ -1084,7 +1118,7 @@ body {
         </div>
         <div class="feat-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
       </div>
-      <div class="feat-card" onclick="showToast('团队角色测评')">
+      <div class="feat-card" onclick="openScales('teamrole')">
         <div class="feat-card-icon fi-pink">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
         </div>
@@ -1094,7 +1128,7 @@ body {
         </div>
         <div class="feat-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
       </div>
-      <div class="feat-card" onclick="showToast('能力与潜力测评')">
+      <div class="feat-card" onclick="openScales('ability')">
         <div class="feat-card-icon fi-slate">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
         </div>
@@ -2389,7 +2423,13 @@ body {
   var QZ_CATS = {
     personality: { name: '性格测评', tagline: '探索你的性格特质、偏好与行为倾向，找到更自洽的成长与职业方向。' },
     interest:    { name: '兴趣测评', tagline: '发现你真正享受的活动领域，定位与之匹配的职业方向。' },
-    value:       { name: '价值观测评', tagline: '看清驱动你的核心价值，找到内在认同的工作与生活重心。' }
+    value:       { name: '价值观测评', tagline: '看清驱动你的核心价值，找到内在认同的工作与生活重心。' },
+    eq:          { name: '情商测评', tagline: '评估你在情绪感知、表达、调节与运用方面的能力水平，认知自己情绪的“操作系统”。' },
+    leadership:  { name: '领导力测评', tagline: '基于“卓越领导的五种习惯行为”，衡量你五项领导行为实践的发生频率。' },
+    stress:      { name: '压力/心理健康测评', tagline: '评估你过去一个月的压力感知水平，了解当前心理负荷与应对资源。' },
+    learning:    { name: '学习风格测评', tagline: '发现你偏好的信息接收方式，找到更适合自己的学习策略。' },
+    teamrole:    { name: '团队角色测评', tagline: '识别你在团队中最自然的贡献角色与协作方式，扬长补短。' },
+    ability:     { name: '能力与潜力测评', tagline: '从九个能力维度评估你的优势领域与发展潜力方向。' }
   };
   var SCALES = [];
   function qzScaleById(id) { for (var i=0;i<SCALES.length;i++){ if(SCALES[i].id===id) return SCALES[i]; } return null; }
@@ -2411,8 +2451,10 @@ body {
         '</div>';
     });
     body.innerHTML = html;
+    // 量表页是独立浮层，不能重置主页面 .content-area 的滚动（否则关闭浮层后主页跳到顶部）；
+    // 只需重置浮层自身列表，避免切换分类时残留上一次的滚动位置
+    body.scrollTop = 0;
     document.getElementById('qzScalePage').classList.add('show');
-    document.querySelector('.content-area').scrollTop = 0;
   };
   window.qzCloseScales = function() {
     document.getElementById('qzScalePage').classList.remove('show');
@@ -2420,6 +2462,8 @@ body {
 
   // ---- 逐题作答器 ----
   var qzSession = null;
+  var qzResultScaleId = null;
+  var qzResultFrom = 'quiz';
   window.openQuiz = function(id) {
     var s = qzScaleById(id); if (!s) return;
     qzSession = { s: s, answers: {}, idx: 0 };
@@ -2431,8 +2475,27 @@ body {
     qzSession = null;
     document.getElementById('qzQuizPage').classList.remove('show');
   };
-  function qzAnswered(){ return !!(qzSession && qzSession.answers[qzSession.idx] != null); }
-  function qzRenderQuestion() {
+  // qzValReady 判断某题的作答是否有效：单选=选了；多选=至少选一项；分配=已将 allocated 总分分配完毕
+  function qzValReady(q, v) {
+    if (v == null) return false;
+    if (q.mode === 'allocate') { var s = 0, i; for (i = 0; i < v.length; i++) { s += v[i]; } return s === q.allocTotal; }
+    if (q.multi) return v.length > 0;
+    return true;
+  }
+  // 注意：单选作答值 0（第一个选项）是合法答案但为假值，必须用 != null 判断而非真值判断
+  function qzAnswered(){
+    if (!qzSession) return false;
+    var v = qzSession.answers[qzSession.idx];
+    return v != null && qzValReady(qzSession.s.questions[qzSession.idx], v);
+  }
+  function qzUnreadyHint(q) {
+    if (q.mode === 'allocate') return '请将本部分 ' + q.allocTotal + ' 分分配完毕';
+    if (q.multi) return '请至少选择一个选项';
+    return '请先作答本题';
+  }
+  // keepScroll=true 用于同一题内的局部重渲染（如分值分配 +/-、多选切换），保留当前滚动位置；
+  // 切换题目时传 false，让新题从顶部开始展示
+  function qzRenderQuestion(keepScroll) {
     if (!qzSession) return;
     var s = qzSession.s, qs = s.questions, idx = qzSession.idx, q = qs[idx];
     document.getElementById('qzQuizTitle').textContent = s.name;
@@ -2442,42 +2505,97 @@ body {
     var sel = qzSession.answers[idx];
     var html = '<div class="qz-question-num">第 ' + (idx+1) + ' 题</div>' +
       '<div class="qz-question-text">' + qzEsc(q.text) + '</div>';
-    q.opts.forEach(function(o, oi){
-      html += '<div class="qz-opt' + (sel===oi ? ' active' : '') + '" onclick="qzAnswer(' + oi + ')">' +
-        '<span class="qz-opt-mark"></span><span>' + qzEsc(o) + '</span></div>';
-    });
+    if (q.mode === 'allocate') {
+      var counts = Array.isArray(sel) ? sel.slice() : new Array(q.opts.length).fill(0);
+      var usedSum = 0, i1; for (i1 = 0; i1 < counts.length; i1++) { usedSum += counts[i1]; }
+      var done = usedSum === q.allocTotal;
+      html += '<div class="qz-alloc-hint"' + (done ? ' style="color:#34B76F;"' : '') + '>' +
+        (done ? '已分配完毕（' + q.allocTotal + '/10 分），可进入下一题' : '请将本部分 10 分分配给你最符合的选项（已 ' + usedSum + ' / 10）') + '</div>';
+      q.opts.forEach(function(o, oi){
+        html += '<div class="qz-alloc-row">' +
+          '<div class="qz-alloc-label">' + qzEsc(o) + '</div>' +
+          '<div class="qz-alloc-ctrl">' +
+          '<div class="qz-alloc-btn' + (counts[oi] <= 0 ? ' disabled' : '') + '" onclick="qzAlloc(' + oi + ',-1)">&#8722;</div>' +
+          '<div class="qz-alloc-num">' + counts[oi] + '</div>' +
+          '<div class="qz-alloc-btn' + (done ? ' disabled' : '') + '" onclick="qzAlloc(' + oi + ',1)">+</div>' +
+          '</div></div>';
+      });
+    } else {
+      var hasSel = q.multi && Array.isArray(sel);
+      q.opts.forEach(function(o, oi){
+        var act = q.multi ? (hasSel && sel.indexOf(oi) >= 0) : (sel === oi);
+        html += '<div class="qz-opt' + (act ? ' active' : '') + (q.multi ? ' qz-multi-mark' : '') + '" onclick="qzAnswer(' + oi + ')">' +
+          '<span class="qz-opt-mark"></span><span>' + qzEsc(o) + '</span></div>';
+      });
+      if (q.multi) html += '<div class="qz-multi-hint">可多选：点选即加入，再次点击可取消；每题至少选一项</div>';
+    }
+    var st = body.scrollTop; // innerHTML 重建会让滚动条被钳到 0，需要先记住再恢复
     body.innerHTML = html;
-    body.scrollTop = 0;
+    body.scrollTop = keepScroll ? st : 0;
     var prevBtn = document.getElementById('qzPrevBtn');
     var nextBtn = document.getElementById('qzNextBtn');
     prevBtn.classList.toggle('disabled', idx === 0);
     var isLast = (idx === qs.length - 1);
     nextBtn.textContent = isLast ? '提交并查看结果' : '下一题';
+    nextBtn.classList.toggle('disabled', !qzAnswered() && q.mode === 'allocate');
     nextBtn.onclick = isLast ? qzSubmit : qzNext;
   }
   window.qzAnswer = function(oi) {
     if (!qzSession) return;
+    var q = qzSession.s.questions[qzSession.idx];
+    if (q.mode === 'allocate') return;
+    if (q.multi) {
+      var arr = qzSession.answers[qzSession.idx];
+      if (!Array.isArray(arr)) arr = [];
+      var p = arr.indexOf(oi);
+      if (p >= 0) arr.splice(p, 1); else arr.push(oi);
+      qzSession.answers[qzSession.idx] = arr;
+      qzRenderQuestion(true); // 多选切换是同题局部更新，保留滚动位置
+      return;
+    }
     qzSession.answers[qzSession.idx] = oi;
     qzRenderQuestion();
-    var s = qzSession, idx = qzSession.idx, qs2 = qzSession.s.questions;
-    if (idx < qs2.length - 1) {
+    var holder = qzSession, idx0 = qzSession.idx, qs2 = qzSession.s.questions;
+    if (idx0 < qs2.length - 1) {
       setTimeout(function(){
-        if (qzSession && qzSession === s && qzSession.idx === idx && qzSession.answers[idx] != null) qzNext();
+        if (qzSession && qzSession === holder && qzSession.idx === idx0 && qzSession.answers[idx0] != null) qzNext();
       }, 260);
     }
   };
+  window.qzAlloc = function(oi, delta) {
+    if (!qzSession) return;
+    var q = qzSession.s.questions[qzSession.idx];
+    if (q.mode !== 'allocate') return;
+    var arr = qzSession.answers[qzSession.idx];
+    if (!Array.isArray(arr)) { arr = new Array(q.opts.length).fill(0); qzSession.answers[qzSession.idx] = arr; }
+    var sum = 0, i2; for (i2 = 0; i2 < arr.length; i2++) { sum += arr[i2]; }
+    var next = arr[oi] + delta;
+    if (next < 0) return;
+    if (delta > 0 && sum >= q.allocTotal) return;
+    arr[oi] = next;
+    qzRenderQuestion(true); // 分值分配是同题局部更新，保留滚动位置
+  };
   window.qzPrev = function() { if (!qzSession || qzSession.idx === 0) return; qzSession.idx--; qzRenderQuestion(); };
-  window.qzNext = function() { if (!qzSession) return; if (!qzAnswered()) { showToast('请先作答本题'); return; } qzSession.idx++; qzRenderQuestion(); };
+  window.qzNext = function() {
+    if (!qzSession) return;
+    var q = qzSession.s.questions[qzSession.idx];
+    if (!qzAnswered()) { showToast(qzUnreadyHint(q)); return; }
+    if (qzSession.idx >= qzSession.s.questions.length - 1) return;
+    qzSession.idx++; qzRenderQuestion();
+  };
   window.qzSubmit = function() {
     if (!qzSession) return;
-    if (!qzAnswered()) { showToast('请先作答本题'); return; }
+    var cur = qzSession.s.questions[qzSession.idx];
+    if (!qzAnswered()) { showToast(qzUnreadyHint(cur)); return; }
     var qs = qzSession.s.questions, n = 0;
-    qs.forEach(function(_, i){ if (qzSession.answers[i] == null) n++; });
-    if (n > 0) { showToast('还有 ' + n + ' 题未作答'); return; }
+    qs.forEach(function(qq, i){ if (!qzValReady(qq, qzSession.answers[i])) n++; });
+    if (n > 0) { showToast('还有 ' + n + ' 题未完成'); return; }
     var s = qzSession.s, answers = qzSession.answers;
     var res = s.scoring(answers);
     var out = s.renderer(res);
     qzSession = null;
+    qzResultScaleId = s.id;
+    qzResultFrom = 'quiz';
     qzRenderResult(s, out);
     qzSaveReport(s, out);
     document.getElementById('qzQuizPage').classList.remove('show');
@@ -2485,13 +2603,22 @@ body {
     document.getElementById('qzResultBody').scrollTop = 0;
   };
   window.qzRestart = function() {
+    var id = qzResultScaleId;
     document.getElementById('qzResultPage').classList.remove('show');
-    document.getElementById('qzScalePage').classList.add('show');
+    if (id) {
+      openQuiz(id);
+    } else {
+      document.getElementById('qzScalePage').classList.add('show');
+    }
   };
   window.qzCloseResult = function() {
     document.getElementById('qzResultPage').classList.remove('show');
-    document.getElementById('qzScalePage').classList.add('show');
-    if (typeof renderAssessReports === 'function') renderAssessReports();
+    if (qzResultFrom === 'report') {
+      if (typeof renderAssessReports === 'function') renderAssessReports();
+    } else {
+      document.getElementById('qzScalePage').classList.add('show');
+      if (typeof renderAssessReports === 'function') renderAssessReports();
+    }
   };
 
   // ---- 结果渲染与报告落库 ----
@@ -2503,7 +2630,7 @@ body {
       (out.badge ? '<div style="display:inline-block;margin-top:10px;font-size:11px;background:#EEF2FF;color:#5B6EF5;padding:4px 12px;border-radius:12px;">' + qzEsc(out.badge) + '</div>' : '') +
       '</div>';
     (out.bars || []).forEach(function(b){
-      var pa = Math.round((b.a/(b.a+b.b))*100) || 50;
+      var pa = (b.a + b.b) ? Math.round((b.a/(b.a+b.b))*100) : 50;
       h += '<div class="card"><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;">' +
         '<span style="font-size:14px;font-weight:600;color:#1a1a1a;">' + qzEsc(b.name) + '</span>' +
         '<span style="font-size:11px;color:#999;">' + qzEsc(b.aLabel) + ' ' + pa + '% · ' + (100-pa) + '% ' + qzEsc(b.bLabel) + '</span></div>' +
@@ -2533,10 +2660,21 @@ body {
       var meta = (typeof s.metaOf === 'function') ? s.metaOf(out) : { summary: out.primary };
       var arr = JSON.parse(localStorage.getItem('zj_assess_reports') || '[]');
       var d = new Date(), mm = ('0'+(d.getMonth()+1)).slice(-2), dd = ('0'+d.getDate()).slice(-2);
-      arr.unshift({ scaleId: s.id, name: s.name, summary: meta.summary || '', meta: meta.meta || '', doneAt: d.getFullYear() + '-' + mm + '-' + dd });
+      var rec = { scaleId: s.id, name: s.name, summary: meta.summary || '', meta: meta.meta || '', doneAt: d.getFullYear() + '-' + mm + '-' + dd, result: out };
+      var found = -1;
+      for (var i=0;i<arr.length;i++){ if (arr[i].scaleId === s.id) { found = i; break; } }
+      if (found >= 0) { rec.doneAt = arr[found].doneAt === rec.doneAt ? rec.doneAt : rec.doneAt; arr.splice(found,1); }
+      arr.unshift(rec);
       if (arr.length > 20) arr.length = 20;
       localStorage.setItem('zj_assess_reports', JSON.stringify(arr));
     } catch(e) {}
+  }
+  function qzLoadReport(scaleId) {
+    try {
+      var arr = JSON.parse(localStorage.getItem('zj_assess_reports') || '[]');
+      for (var i=0;i<arr.length;i++){ if (arr[i].scaleId === scaleId) return arr[i]; }
+    } catch(e) {}
+    return null;
   }
 
   // ---- MBTI 性格类型测评（4 维 × 16 题 = 64，末题为平局仲裁）----
@@ -2688,14 +2826,25 @@ body {
     }
     var h = '';
     arr.slice(0,5).forEach(function(r){
-      h += '<div class="card" style="cursor:pointer;" onclick="reopenReport(\'' + qzEsc(r.scaleId) + '\')">' +
+      h += '<div class="card" style="cursor:pointer;" onclick="viewReport(\'' + qzEsc(r.scaleId) + '\')">' +
         '<div style="display:flex;align-items:center;justify-content:space-between;">' +
         '<div><div style="font-size:14px;font-weight:600;color:#1a1a1a;">' + qzEsc(r.name) + '</div>' +
         '<div style="font-size:12px;color:#999;margin-top:3px;">' + qzEsc(r.doneAt) + ' · ' + qzEsc(r.summary || '') + '</div></div>' +
-        '<span style="font-size:11px;background:#EEF2FF;color:#5B6EF5;padding:3px 10px;border-radius:10px;">再测一次</span>' +
+        '<span style="font-size:11px;background:#EEF2FF;color:#5B6EF5;padding:3px 10px;border-radius:10px;">查看报告</span>' +
         '</div></div>';
     });
     box.innerHTML = h;
+  };
+  window.viewReport = function(scaleId) {
+    var s = qzScaleById(scaleId); if (!s) { showToast('该量表已下线'); return; }
+    var rec = qzLoadReport(scaleId);
+    if (!rec || !rec.result) { showToast('暂无该量表的结果记录'); openScales(s.cat); return; }
+    qzResultScaleId = scaleId;
+    qzResultFrom = 'report';
+    qzRenderResult(s, rec.result);
+    document.getElementById('qzScalePage').classList.remove('show');
+    document.getElementById('qzResultPage').classList.add('show');
+    document.getElementById('qzResultBody').scrollTop = 0;
   };
   window.reopenReport = function(scaleId) {
     var s = qzScaleById(scaleId); if (!s) { showToast('该量表已下线'); return; }
@@ -2932,6 +3081,719 @@ body {
       };
     },
     metaOf: function(out){ return { summary: out.primarySub.replace('你最看重的职业价值：',''), meta: out.primary }; }
+  });
+
+  // ---- 16PF 卡特尔16种人格因素问卷（16 因素 × 10 题 = 160，三选一）----
+  var PF16_FACTORS = {
+    A:  { name:'乐群性', hi:'热心而乐群：喜欢与人相处、融入集体，待人热情。', lo:'缄默而独立：偏好独处或小圈子，行事不依赖他人的赞许。' },
+    B:  { name:'聪慧性', hi:'思维敏捷：抽象思考与学习能力强，善于举一反三。', lo:'思维务实：更擅长具体与经验性思考，消化抽象内容需更多时间。' },
+    C:  { name:'稳定性', hi:'情绪稳定：面对压力能保持平静，处理问题不情绪化。', lo:'情绪易动：容易因挫折与琐事烦躁，情绪恢复需要时间。' },
+    E:  { name:'恃强性', hi:'好强固执：独立积极，有支配与竞争意愿，不轻易让步。', lo:'谦逊顺从：温和随和，倾向迁就与顺应他人。' },
+    F:  { name:'兴奋性', hi:'轻松兴奋：活泼健谈，情绪外露，富有感染力。', lo:'严肃审慎：冷静寡言，行事克制内敛。' },
+    G:  { name:'有恒性', hi:'有恒负责：做事尽职，重承诺守规则，可靠踏实。', lo:'权宜灵活：原则性较弱，会视情况调整责任与承诺。' },
+    H:  { name:'敢为性', hi:'冒险敢为：不畏惧陌生与风险，敢想敢做。', lo:'畏怯退缩：面对风险与关注感到不安，倾向保守回避。' },
+    I:  { name:'敏感性', hi:'敏感感性：感情丰富，易被触动，重视感受与氛围。', lo:'理智现实：就事论事，以客观逻辑为先，不感情用事。' },
+    L:  { name:'怀疑性', hi:'怀疑戒备：不易轻信，凡事先审视动机与依据。', lo:'信赖随和：容易相信他人，与人相处不设防。' },
+    M:  { name:'幻想性', hi:'幻想丰富：想象力强，想法跳跃，不拘现实细节。', lo:'现实具体：关注实际与当下，想法合乎成规。' },
+    N:  { name:'世故性', hi:'精明世故：善于察言观色，处事圆滑得体。', lo:'坦白直率：直来直去，不擅或不屑迂回委婉。' },
+    O:  { name:'忧虑性', hi:'忧虑抑郁：容易不安自责，常担心出问题。', lo:'安详沉着：心态平和，很少有不安与自责。' },
+    Q1: { name:'实验性', hi:'求新求变：喜欢尝试新方法与新观念，敢于挑战常规。', lo:'保守传统：尊重既定经验与惯例，不轻易改变。' },
+    Q2: { name:'独立性', hi:'自立自强：独立决策与行动，不依赖他人。', lo:'依赖随群：倾向与他人协作、依靠集体。' },
+    Q3: { name:'自律性', hi:'自律严谨：自我要求高，计划性强，行事有原则。', lo:'随性松散：不拘小节，自我约束较弱。' },
+    Q4: { name:'紧张性', hi:'紧张困扰：常处于紧绷状态，容易急躁、难以彻底放松。', lo:'心平气和：松弛平静，遇事不急不躁。' }
+  };
+  var PF16_ORDER = ['A','B','C','E','F','G','H','I','L','M','N','O','Q1','Q2','Q3','Q4'];
+  var PF16_QDATA = [
+    ['A',1,'在团体活动中，我通常…','积极主动参与、乐在其中','看情况，有时参与','能躲就躲，安静旁观'],
+    ['A',-1,'周末我更愿意…','独处休息','随缘','约朋友一起活动'],
+    ['A',1,'加入新集体时，我…','很快认识很多人','慢慢熟悉','很少主动结识'],
+    ['A',-1,'朋友遇到高兴的事，我…','觉得没什么特别','礼貌祝贺','真心为ta高兴，想一起庆祝'],
+    ['A',1,'陌生场合里，我…','很容易和别人打成一片','需要有人先开口','宁愿一个人待着'],
+    ['A',-1,'长期独自工作，我会…','正中下怀','可以接受','觉得憋闷、很想找人交流'],
+    ['A',1,'小组合作时，我…','喜欢大家热热闹闹一起讨论','无所谓形式','更想自己完成自己的部分'],
+    ['A',-1,'遇到喜事，我…','不太想声张','告诉几个亲近的人','恨不得马上告诉所有人'],
+    ['A',1,'别人说我是个…','热情随和的人','时而热络时而安静','安静冷淡的人'],
+    ['A',-1,'和很多人一起吃饭，我…','安静吃完就好','跟着大家节奏','招呼大家、活跃气氛'],
+    ['B',1,'遇到复杂问题，我…','很快理出头绪','想一会儿能理清','容易绕晕'],
+    ['B',-1,'读一本有深度的书，我…','常常似懂非懂','读懂大部分','能抓住核心逻辑'],
+    ['B',1,'玩逻辑题或脑筋急转弯，我…','很有兴趣也做得不错','一般','不太行也不感兴趣'],
+    ['B',-1,'学习新东西时，我…','常常要费很大劲','多学几遍能懂','一点就通'],
+    ['B',1,'记忆新东西，我…','找规律很快记住','重复几次记住','死记硬背也记不住'],
+    ['B',-1,'面对数字计算，我…','容易出错','需要慢慢算','反应很快'],
+    ['B',1,'讨论抽象概念时，我…','乐在其中、理解很快','能跟得上','觉得空泛难懂'],
+    ['B',-1,'猜谜或找规律，我…','几乎解不出','偶尔解出','常能率先解出'],
+    ['B',1,'我更擅长…','抽象推理和归纳','都还行','记具体事实和细节'],
+    ['B',-1,'我觉得我的思维…','偏慢','正常水平','敏捷、联想快'],
+    ['C',1,'遇到意外打击，我…','能较快冷静应对','要缓一阵子','情绪起伏很大'],
+    ['C',-1,'夜里回想烦心事，我…','常常辗转难眠','偶尔失眠','想开就睡'],
+    ['C',1,'面对突发变故，我…','镇定处理','先慌一下再应对','手足无措'],
+    ['C',-1,'事情不顺时，我…','很容易崩溃','情绪有点低','不受影响继续推进'],
+    ['C',1,'工作压力大时，我…','照常运转、不受太大影响','有点影响','容易失眠烦躁'],
+    ['C',-1,'环境嘈杂混乱时，我…','烦躁得没法做事','效率略降','仍能专注做事'],
+    ['C',1,'被批评后，我…','就事论事、很快过去','会难受一会儿','久久放不下'],
+    ['C',-1,'计划被打乱，我…','一整天都不舒服','有些不爽但能调整','情绪几乎不受影响'],
+    ['C',1,'我觉得我的情绪…','平稳可控','时好时坏','起伏明显'],
+    ['C',-1,'别人眼中的我，在压力下…','容易急躁','还算镇定','很沉得住气'],
+    ['E',1,'与人意见不合，我…','坚持己见、据理力争','各说各的、不强求','顺从多数、避免冲突'],
+    ['E',-1,'谈判或争执中，我…','常常让步','适可而止','要占上风才罢休'],
+    ['E',1,'团队需要负责人时，我…','愿意站出来主导','看情况','宁愿听安排'],
+    ['E',-1,'被安排做不认同的事，我…','先照做再说','委婉表达','直接提出异议'],
+    ['E',1,'竞争场合，我…','很想赢、要争出头','尽力就好','不争不抢'],
+    ['E',-1,'我对“听命于人”的感受…','觉得轻松','可以接受','很不服气'],
+    ['E',1,'别人对我的评价更接近…','强势果断','有主见但不强势','好说话'],
+    ['E',-1,'集体决策时，我…','多数怎么说就怎么好','参与讨论不坚持','努力让大家接受我的方案'],
+    ['E',1,'面对权威，我…','该质疑就质疑','尊重但不盲从','一般都会服从'],
+    ['E',-1,'我的处事风格更接近…','随和退让','灵活','有主见、不轻易让步'],
+    ['F',1,'聚会气氛冷场时，我…','主动起头活跃气氛','偶尔带带节奏','很少主动'],
+    ['F',-1,'我的表情通常…','变化很小','适度','丰富多变'],
+    ['F',1,'遇到好笑的事，我…','开怀大笑、感染他人','会笑但克制','觉得好笑但脸上淡淡的'],
+    ['F',-1,'面对庆祝和狂欢，我…','觉得吵闹累人','适度参与','全情投入'],
+    ['F',1,'别人形容我是…','活泼有趣','随和','严肃沉稳'],
+    ['F',-1,'说话时我…','平铺直叙','自然','语气生动、爱开玩笑'],
+    ['F',1,'无聊的时候，我…','总能给自己找乐子','找点事做','就安静待着'],
+    ['F',-1,'集体场合，我的笑声通常是…','几乎不笑出声','正常','最响亮的那一个'],
+    ['F',1,'我的日常状态更接近…','精力旺盛、兴致勃勃','平稳','安静严肃'],
+    ['F',-1,'朋友们觉得和我相处…','偏安静','舒服自在','轻松欢乐、气氛好'],
+    ['G',1,'答应别人的事，我…','无论如何都会做到','尽量做到','忘了或做不到也常见'],
+    ['G',-1,'走后门、钻空子，我…','有机会就占','小事无妨','坚决不做'],
+    ['G',1,'做事我会…','有始有终、绝不半途而废','多数能坚持','常虎头蛇尾'],
+    ['G',-1,'上班或上课迟到，我…','经常','偶尔','几乎从不发生'],
+    ['G',1,'分配给我的责任，我…','尽职尽责扛到底','尽力而为','能推就推'],
+    ['G',-1,'细节检查这类枯燥工作，我…','常常敷衍','基本认真','照样一丝不苟'],
+    ['G',1,'规则对我而言…','必须遵守，即使没人监督','重要场合遵守','方便时遵守'],
+    ['G',-1,'长期目标，我…','很难坚持','坚持一段时间','定下就持续执行'],
+    ['G',1,'别人把重要的事托付给我，我…','当作承诺认真对待','认真但可能疏漏','经常不当回事'],
+    ['G',-1,'我的工作文件/记录…','比较随意','大体规范','始终整齐规范'],
+    ['H',1,'面对陌生环境，我…','很快适应、跃跃欲试','稍作适应','紧张不安'],
+    ['H',-1,'尴尬或出糗的场面，我…','非常难堪','有点难为情','不太在意、能自嘲'],
+    ['H',1,'公开场合发言，我…','不怯场、想讲就讲','略有紧张','很怕、很紧张'],
+    ['H',-1,'尝试没做过的事，我…','怕做不好就算了','看看别人再做','先干了再说'],
+    ['H',1,'主动结交地位高或陌生的人，我…','毫无压力','有点紧张但敢','能避则避'],
+    ['H',-1,'面对可能有风险的机会，我…','倾向回避','权衡后再定','敢于出手'],
+    ['H',1,'高风险活动（如蹦极），我…','很想尝试','想想可以，未必做','绝不尝试'],
+    ['H',-1,'面对权威人士，我…','紧张回避','略拘谨','坦然自若、敢于表达'],
+    ['H',1,'我对冒险的态度…','冒险是生活的乐趣','偶尔冒险','稳定安全最重要'],
+    ['H',-1,'新开的路、陌生的地方，我…','不太敢去','做点功课再去','敢闯敢探'],
+    ['I',1,'看感人的电影，我…','常常热泪盈眶','会感动','很少被打动'],
+    ['I',-1,'批评别人时，我…','对事不对人直接讲','注意分寸','顾虑对方的感受'],
+    ['I',1,'别人的情绪变化，我…','敏锐察觉','能感觉到','常常察觉不到'],
+    ['I',-1,'朋友难过时，我…','更想帮忙解决问题','安慰但能抽离','陪着难受、感同身受'],
+    ['I',1,'做决定时，我更看重…','感受与情感','兼顾','事实与逻辑'],
+    ['I',-1,'我容易被…','保持独立判断','轻度影响','氛围和情绪带动'],
+    ['I',1,'我更欣赏…','诗意、有情怀的表达','都有','精确、实用的表达'],
+    ['I',-1,'我对细节和氛围的感知…','比较粗线条','一般','细腻入微'],
+    ['I',1,'艺术作品打动我…','常常、很深','偶尔','很少'],
+    ['I',-1,'“感情用事”这个说法…','我从不','偶尔','我确实有时如此'],
+    ['L',1,'别人对我示好，我…','先想想ta的意图','适度接受','自然接受'],
+    ['L',-1,'初识的人，我…','愿意信任','不设防也不轻信','保持警惕、慢慢观察'],
+    ['L',1,'有人帮我，我常想…','ta是不是有所图','不一定','就是好心吧'],
+    ['L',-1,'对于听来的消息，我…','倾向于相信','半信半疑','先怀疑再核实'],
+    ['L',1,'我的秘密…','几乎不告诉任何人','只告诉极少数人','聊得来就说'],
+    ['L',-1,'别人的承诺，我…','通常相信','多数相信','不全信、看行动'],
+    ['L',1,'遭到不公时，我…','怀疑是有人针对我','可能巧合','很少往人身上想'],
+    ['L',-1,'团队里的竞争，我…','坦诚相待','略有防备','时刻提防被算计'],
+    ['L',1,'同事或同学的动机，我…','常常琢磨','偶尔想','从不猜疑'],
+    ['L',-1,'我觉得世道…','好人多','好坏参半','人心复杂、须多提防'],
+    ['M',1,'发呆时，我…','常在脑子里编故事、想入非非','偶尔','很少空想'],
+    ['M',-1,'我的计划…','一板一眼','偶尔调整','常变常新、充满想象'],
+    ['M',1,'我的想法常被说…','天马行空','有意思','切合实际'],
+    ['M',-1,'我对现实细节…','非常在意','适度关注','不太在意、活在想象里'],
+    ['M',1,'处理问题，我…','常冒出非常规的点子','偶尔','按常规办'],
+    ['M',-1,'白日梦，我…','几乎不做','偶尔','经常做、很生动'],
+    ['M',1,'讲述事情，我…','爱添油加醋、讲得精彩','适度渲染','如实陈述'],
+    ['M',-1,'别人常说我…','脚踏实地','有点跳','不切实际'],
+    ['M',1,'我更向往…','艺术家般自由想象的生活','兼顾','踏实有序的生活'],
+    ['M',-1,'看云、看风景时我…','就是看看','有点感想','浮想联翩'],
+    ['N',1,'说话前，我会…','掂量措辞、看人下菜','注意分寸','想到什么说什么'],
+    ['N',-1,'我的说服方式…','直接说出来','摆事实讲道理','投其所好、讲策略'],
+    ['N',1,'复杂的人际局面，我…','应对自如','基本能应付','常常不知道怎么办'],
+    ['N',-1,'我更倾向…','直来直去','看场合','委婉含蓄地表达'],
+    ['N',1,'看人，我…','一眼能看出ta的心思','大致判断','常看走眼'],
+    ['N',-1,'被占便宜时，我…','常被占便宜才发现','事后才反应过来','立刻察觉、不动声色应对'],
+    ['N',1,'社交礼仪和潜规则…','烂熟于心、运用自如','基本了解','不太在意'],
+    ['N',-1,'我觉得为人处世…','真诚比技巧重要','适度即可','圆滑是必要智慧'],
+    ['N',1,'场面话，我…','说得很漂亮','会说但不爱说','不会说也不屑说'],
+    ['N',-1,'在陌生人面前，我…','容易说漏嘴或显得笨拙','得体','滴水不漏'],
+    ['O',1,'明天要做的事，我今晚…','担心出错、反复想','略想一下','倒头就睡'],
+    ['O',-1,'事情顺利时，我…','安心享受','略放心','仍担心出岔子'],
+    ['O',1,'我常常…','为还没发生的事担忧','偶尔','几乎不'],
+    ['O',-1,'小的失误，我…','很快翻篇','自责一下','反复自责'],
+    ['O',1,'我对未来的感觉…','忧虑多于期待','差不多','期待多于忧虑'],
+    ['O',-1,'身体有点不舒服，我…','不当回事','留意但不慌','担心是大病'],
+    ['O',1,'别人的评价，我…','在意很久','在意一阵','听听就好'],
+    ['O',-1,'做决定后，我…','基本不回头想','偶尔','常后悔、想“要是…”'],
+    ['O',1,'夜深人静时，我…','容易多愁善感、思绪纷乱','偶尔','睡得香'],
+    ['O',-1,'我觉得自己…','心境平和','一般','容易紧张不安'],
+    ['Q1',1,'新技术/新工具出来，我…','第一时间尝鲜','看看评价再试','守着用惯的'],
+    ['Q1',-1,'经验与数据冲突时，我…','信经验','再观察','信数据、更新观念'],
+    ['Q1',1,'面对传统做法，我…','常想能不能改改','偶尔嘀咕','照老规矩办'],
+    ['Q1',-1,'我对流行趋势…','不感兴趣','偶尔关注','敏锐追随甚至引领'],
+    ['Q1',1,'我对“异想天开”的想法…','很感兴趣、愿意试验','看情况','觉得不靠谱'],
+    ['Q1',-1,'工作方法上，我…','一套用到底','偶尔改进','不断尝试新方法'],
+    ['Q1',1,'别人挑战权威结论，我…','欣赏、愿意参与讨论','围观','觉得大逆不道'],
+    ['Q1',-1,'换新系统/新流程，我…','怀念旧的','被迫接受','兴奋、很快上手'],
+    ['Q1',1,'我对异于常人的观点…','很包容甚至兴奋','能接受','难以接受'],
+    ['Q1',-1,'我更倾向…','保守维持','改良','激进变革'],
+    ['Q2',1,'重要决定，我…','自己拿主意','征求意见后自己定','主要听别人的'],
+    ['Q2',-1,'遇到难题，我…','马上找人帮忙','看情况求助','先自己钻研'],
+    ['Q2',1,'工作任务，我偏好…','独自完成','看任务性质','和大家一起'],
+    ['Q2',-1,'别人的意见和我不同时，我…','常被说服','参考后决定','按自己的走'],
+    ['Q2',1,'一个人旅行/吃饭/看电影，我…','很自在','可以','浑身不自在'],
+    ['Q2',-1,'集体中，我…','随大流更安心','适度融入','保持独立、不随大流'],
+    ['Q2',1,'我觉得我…','完全能照顾好自己','基本可以','需要有人照应'],
+    ['Q2',-1,'生活安排，我…','常依赖他人','大体自己来','全部自己打理、井井有条'],
+    ['Q2',1,'需要搭把手时，我…','宁可自己想办法解决','看情况','很自然地请人帮忙'],
+    ['Q2',-1,'“依赖别人”在我看来…','很正常','人之常情','能免则免'],
+    ['Q3',1,'我的生活作息…','严格规律','大致规律','随心所欲'],
+    ['Q3',-1,'我的桌面/文件/房间…','比较乱','看得过去','井然有序'],
+    ['Q3',1,'制定的计划，我…','逐条执行不打折扣','大体执行','常常作废'],
+    ['Q3',-1,'承诺自己“明天开始…”，我…','常做不到','多数做到','说到做到'],
+    ['Q3',1,'对自己，我…','要求很高、自我批评','要求适度','比较纵容'],
+    ['Q3',-1,'独处的时间，我…','混着过','有安排','安排得明明白白'],
+    ['Q3',1,'细节和规范，我…','一丝不苟','重要场合才讲究','不拘小节'],
+    ['Q3',-1,'别人认为我…','随性散漫','还行','严谨自律'],
+    ['Q3',1,'工作中我…','流程标准执行到位','大体到位','常简化步骤'],
+    ['Q3',-1,'答应自己的事（如健身、早睡），我…','经常半途而废','有时做到','基本都能兑现'],
+    ['Q4',1,'闲下来时，我…','仍觉得有股劲没处使、静不下来','还行','彻底放松'],
+    ['Q4',-1,'突然的响动，我…','波澜不惊','有点反应','吓一跳、心跳很快'],
+    ['Q4',1,'别人催促，我…','立刻烦躁','有点急','不受影响'],
+    ['Q4',-1,'消遣娱乐时，我…','特别投入享受','能放松','也难以完全放松'],
+    ['Q4',1,'等待（排队、结果）时，我…','坐立不安','略不耐烦','安静等待'],
+    ['Q4',-1,'我的睡眠…','深沉','一般','浅、容易醒'],
+    ['Q4',1,'遇到小事不顺，我…','火气很大','有点火','不生气'],
+    ['Q4',-1,'别人说我…','慢性子','正常','风风火火、闲不住'],
+    ['Q4',1,'我常常…','觉得有很多事赶着做','偶尔','从容'],
+    ['Q4',-1,'肌肉紧绷（肩颈发紧、咬牙），我…','从不','偶尔','常常']
+  ];
+  var PF16_QUESTIONS = PF16_QDATA.map(function(q){ return { text:q[2], opts:[q[3],q[4],q[5]], f:q[0], dir:q[1] }; });
+  SCALES.push({
+    id:'pf16', cat:'personality', name:'卡特尔16PF人格测评', color:'fi-orange',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg>',
+    desc: '160 题 · 16 人格因素', minutes: 25,
+    questions: PF16_QUESTIONS,
+    scoring: function(a){
+      var raw = {}, sten = {};
+      PF16_ORDER.forEach(function(k){ raw[k] = 0; });
+      PF16_QUESTIONS.forEach(function(q, i){
+        var v = a[i]; if (v == null) return;
+        raw[q.f] += (q.dir === 1 ? (2 - v) : v);
+      });
+      PF16_ORDER.forEach(function(k){
+        sten[k] = Math.max(1, Math.min(10, Math.round(raw[k] * 9 / 20) + 1));
+      });
+      return { raw: raw, sten: sten };
+    },
+    renderer: function(res){
+      var sorted = PF16_ORDER.slice().sort(function(x,y){ return (res.sten[y]-res.sten[x]) || (PF16_ORDER.indexOf(x)-PF16_ORDER.indexOf(y)); });
+      var t1 = PF16_FACTORS[sorted[0]], v1 = res.sten[sorted[0]];
+      var highs = sorted.filter(function(k){ return res.sten[k] >= 7; });
+      var lows = sorted.filter(function(k){ return res.sten[k] <= 4; }).reverse();
+      function rows(sel, pick){
+        if (!sel.length) return '<div style="font-size:13px;color:#999;line-height:1.7;">没有特别极端的因素，整体趋于中间水平。</div>';
+        return sel.map(function(k){
+          var f = PF16_FACTORS[k];
+          return '<div style="font-size:13px;color:#444;line-height:1.7;padding:8px 0;border-bottom:0.5px solid #F0F0F0;"><b>' + k + ' ' + f.name + '</b>（' + res.sten[k] + '/10）<br><span style="color:#999;">' + pick(f) + '</span></div>';
+        }).join('');
+      }
+      var listRows = PF16_ORDER.map(function(k){
+        var f = PF16_FACTORS[k], v = res.sten[k];
+        var interp = v >= 7 ? f.hi : (v <= 4 ? f.lo : '中间水平——两种倾向兼具，视情境灵活表现。');
+        return { title: k + ' ' + f.name, value: v + '/10', note: interp + (v >= 7 ? '（高分）' : v <= 4 ? '（低分）' : '') };
+      });
+      return {
+        primary: t1.name + ' · ' + (v1 >= 7 ? '高分倾向' : v1 <= 4 ? '低分倾向' : '中间水平'),
+        primarySub: v1 >= 7 ? t1.hi : v1 <= 4 ? t1.lo : '你最突出的因素两种倾向兼具，视情境灵活表现。',
+        badge: '16 因素剖面 · 高分：' + (highs.length ? highs.map(function(k){ return PF16_FACTORS[k].name; }).join('、') : '无') + '｜低分：' + (lows.length ? lows.map(function(k){ return PF16_FACTORS[k].name; }).join('、') : '无'),
+        list: listRows,
+        sections: [
+          { title:'高分因素解读（≥7 分）', html: rows(highs, function(f){ return f.hi; }) },
+          { title:'低分因素解读（≤4 分）', html: rows(lows, function(f){ return f.lo; }) }
+        ],
+        advice: ['16PF 的 16 个维度相互独立、无好坏之分，高分低分各有所长，重点是与环境的匹配。','优先关注得分最极端的 2-3 个因素，它们最能解释你与人相处和应对压力的典型方式。','可与 MBTI 类型互相印证：MBTI 给出偏好类型，16PF 给出各特质的强度剖面。']
+      };
+    },
+    metaOf: function(out){ return { summary: out.primary.split(' · ')[0], meta: out.primary }; }
+  });
+
+  // ---- EPQ 艾森克人格问卷（成人 88 题，是否作答，E/N/P/L 四量表）----
+  var EPQ_NORMS = {
+    E: { name:'外向-内向', max:21, m:12, sd:4.5, hi:'外向：爱交往、喜冒险、渴望刺激与兴奋，情绪易冲动；人少安静的环境会让你觉得无聊。', mid:'中间型：既能融入热闹场合，也能安静独处，内外倾向随情境切换。', lo:'内向：安静、内省、喜欢按部就班，社交消耗大，偏好稳定有序、少刺激的环境。' },
+    N: { name:'情绪稳定性（神经质）', max:24, m:11, sd:5, hi:'情绪不稳：易焦虑、易激动，遇到刺激情绪反应强烈且平复慢，需留意压力管理。', mid:'情绪较为平稳：多数时候平静，压力较大时也会明显波动。', lo:'情绪稳定：反应平缓，遇事沉着，不易因琐事烦扰，情绪恢复快。' },
+    P: { name:'精神质', max:23, m:6, sd:3.5, hi:'精神质偏高：可能显得孤独、不关心他人、难以适应环境、待人缺乏温度；更宜从事需要独立与理性判断的工作。', mid:'精神质居中：既不冷酷怪僻，也不过分柔软，属正常范围。', lo:'精神质低：待人友善、有同理心、易于适应环境、关心他人。' },
+    L: { name:'掩饰度（效度）', max:20, m:9, sd:3.5, hi:'掩饰倾向明显：回答可能偏“社会期望”，本次结果解读需谨慎。', mid:'掩饰度中等：作答基本可信。', lo:'作答坦率：结果可信度较高。' }
+  };
+  var EPQ_ORDER = ['E','N','P','L'];
+  var EPQ_ITEMS = [
+    ['E',1,'你是否健谈？'],
+    ['E',1,'你是否精力充沛、活泼好动？'],
+    ['E',1,'你是否有很多朋友？'],
+    ['E',1,'你是否喜欢参加热闹的聚会或集体活动？'],
+    ['E',1,'在聚会上，你是否常主动与陌生人攀谈？'],
+    ['E',1,'你是否喜欢有冒险刺激味道的活动？'],
+    ['E',1,'你做事是否爽快、很少犹豫？'],
+    ['E',1,'你是否容易被别人逗笑？'],
+    ['E',1,'别人是否觉得你是个开朗活泼的人？'],
+    ['E',1,'你是否很快就能和陌生人熟悉起来？'],
+    ['E',1,'心情不好时，你是否愿意找朋友倾诉？'],
+    ['E',1,'你是否喜欢给大家讲笑话、活跃气氛？'],
+    ['E',1,'你是否乐于在众人面前表现自己？'],
+    ['E',1,'你是否常常凭一时兴致、心血来潮地做事？'],
+    ['E',1,'你说话是否语速偏快、滔滔不绝？'],
+    ['E',1,'你是否闲不住、总想找点事做？'],
+    ['E',1,'你是否喜欢结交新朋友？'],
+    ['E',1,'你是否常常想到什么就说什么？'],
+    ['E',1,'你是否喜欢快节奏的生活？'],
+    ['E',1,'你是否容易结识各种各样的人？'],
+    ['E',1,'你开心的时候是否特别爱说爱笑？'],
+    ['N',1,'你是否容易激动、发脾气？'],
+    ['N',1,'你是否常常担心一些也许不会发生的事？'],
+    ['N',1,'你的情绪是否容易大起大落？'],
+    ['N',1,'你是否时常感到闷闷不乐？'],
+    ['N',1,'你是否容易失眠或睡不安稳？'],
+    ['N',1,'你是否经常感到莫名其妙的烦乱不安？'],
+    ['N',1,'你是否容易紧张（如考试、面试前）？'],
+    ['N',1,'你是否常常感到疲乏、提不起精神？'],
+    ['N',1,'遇到不愉快的事，你是否会长时间放不下？'],
+    ['N',1,'你是否常常觉得别人待你不公平？'],
+    ['N',1,'你是否容易觉得受了委屈？'],
+    ['N',1,'你是否常常独自一人暗自伤心？'],
+    ['N',1,'你是否容易心慌、心跳加快？'],
+    ['N',1,'你是否常做噩梦？'],
+    ['N',1,'你紧张时是否会手心出汗或发抖？'],
+    ['N',1,'你是否常常胃口不好、不思饮食？'],
+    ['N',1,'你是否容易对什么都提不起兴趣？'],
+    ['N',1,'你是否常常为做过的事后悔？'],
+    ['N',1,'你是否经常坐立不安、难以安静？'],
+    ['N',1,'你是否容易因为一点小事而心烦意乱？'],
+    ['N',1,'你是否觉得自己常常精神紧张、休息不好？'],
+    ['N',1,'你是否时常感到孤独？'],
+    ['N',1,'你是否常常为将来的事忧心忡忡？'],
+    ['N',1,'你是否比一般人容易流泪？'],
+    ['P',1,'你说话是否会不顾及别人的感受？'],
+    ['P',1,'对伤害过你的人，你是否想过要报复？'],
+    ['P',1,'你是否喜欢看别人争吵或出丑？'],
+    ['P',1,'你是否觉得大多数人本质上是靠不住的？'],
+    ['P',1,'你是否曾经欺负过比自己弱小的孩子或小动物？'],
+    ['P',1,'你是否喜欢恶作剧？'],
+    ['P',1,'你是否觉得“以牙还牙”是理所应当的？'],
+    ['P',1,'你是否常常独来独往、与人合不来？'],
+    ['P',1,'你是否觉得遵守太多规矩很死板、没必要？'],
+    ['P',1,'你是否对周围的人和事常常漠不关心？'],
+    ['P',1,'你是否喜欢看包含血腥或暴力情节的电影、故事？'],
+    ['P',1,'你是否常常有一些别人觉得古怪的念头？'],
+    ['P',1,'你是否觉得社会规则对你是一种束缚？'],
+    ['P',1,'你是否曾为了自己的利益而欺骗过别人？'],
+    ['P',1,'你是否觉得别人的痛苦与自己关系不大？'],
+    ['P',1,'你做事是否常常不计后果？'],
+    ['P',1,'你是否觉得自己和周围的人格格不入？'],
+    ['P',1,'你是否更愿意和“与众不同”的人来往？'],
+    ['P',1,'你是否觉得幽默和玩笑大多很无聊？'],
+    ['P',1,'你是否对自己的前途持无所谓的态度？'],
+    ['P',1,'你是否曾经残忍地对待过人或动物？'],
+    ['P',1,'你是否觉得关心别人大多是一种麻烦？'],
+    ['P',1,'你是否容易与人发生冲突、甚至动手？'],
+    ['L',-1,'你是否曾在背后说过别人的坏话？'],
+    ['L',1,'你是否总是对人有礼貌、从未失礼过？'],
+    ['L',-1,'你是否曾拿过不属于自己的东西（哪怕很小）？'],
+    ['L',-1,'你是否曾在考试中作过弊？'],
+    ['L',1,'你是否每天早晚都认真刷牙？'],
+    ['L',1,'你是否从来没有说过谎？'],
+    ['L',-1,'你是否曾和父母顶过嘴？'],
+    ['L',1,'你是否总是按时作息、从不熬夜？'],
+    ['L',-1,'你是否曾有意逃避过该做的事（如值日、家务）？'],
+    ['L',1,'你是否从未与人发生过争吵？'],
+    ['L',-1,'你是否曾把本该自己承担的责任推给别人？'],
+    ['L',1,'你是否总能耐心听别人把话讲完、从不打断？'],
+    ['L',-1,'你是否曾随手乱扔过垃圾？'],
+    ['L',1,'你是否从来没有嫉妒过别人？'],
+    ['L',1,'你答应别人的事是否都一定做到了？'],
+    ['L',-1,'你是否曾迟到或爽约过？'],
+    ['L',1,'你是否总是心情愉快、从不烦恼？'],
+    ['L',-1,'你是否曾用不礼貌的话骂过人？'],
+    ['L',1,'你是否从不占小便宜？'],
+    ['L',1,'你是否从未对人发过脾气？']
+  ];
+  var EPQ_QUESTIONS = EPQ_ITEMS.map(function(it){ return { text: it[2], opts:['是','否'] }; });
+  SCALES.push({
+    id:'epq', cat:'personality', name:'艾森克人格测评（EPQ）', color:'fi-orange',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a7 7 0 0 0-7 7c0 2.5 1.3 4.7 3 6v3h8v-3c1.7-1.3 3-3.5 3-6a7 7 0 0 0-7-7z"/><path d="M9 21h6"/></svg>',
+    desc: '88 题 · E/N/P/L 四个维度', minutes: 12,
+    questions: EPQ_QUESTIONS,
+    scoring: function(a){
+      var raw = { E:0, N:0, P:0, L:0 };
+      EPQ_ITEMS.forEach(function(it, i){
+        var v = a[i]; if (v == null) return;
+        var hit = (it[1] === 1) ? (v === 0) : (v === 1);
+        raw[it[0]] += hit ? 1 : 0;
+      });
+      var ts = {};
+      EPQ_ORDER.forEach(function(k){
+        var n = EPQ_NORMS[k];
+        ts[k] = Math.max(25, Math.min(80, Math.round(50 + 10 * (raw[k] - n.m) / n.sd)));
+      });
+      return { raw: raw, ts: ts };
+    },
+    renderer: function(res){
+      var tE = res.ts.E, tN = res.ts.N;
+      var tem;
+      if (tE >= 55 && tN >= 55) tem = { n:'胆汁质倾向', d:'外向而情绪不稳：精力旺盛、反应快、易冲动，情绪来得快去得也快。做事有冲劲，但需要练习“刹车”与情绪缓冲。' };
+      else if (tE >= 55 && tN <= 45) tem = { n:'多血质倾向', d:'外向而情绪稳定：活泼乐观、善交际、适应力强，是典型的“气氛担当”。注意避免兴趣广泛却难以深耕。' };
+      else if (tE <= 45 && tN >= 55) tem = { n:'抑郁质倾向', d:'内向而情绪不稳：敏感细腻、感受深、体验丰富，但易受情绪困扰。适合安静、结构清晰的环境，发挥洞察与专注的优势。' };
+      else if (tE <= 45 && tN <= 45) tem = { n:'黏液质倾向', d:'内向而情绪稳定：沉着冷静、踏实可靠、情绪平稳，是团队里的“定海神针”。注意避免回避表达与节奏偏慢。' };
+      else tem = { n:'混合气质', d:'你的外向性与情绪稳定性都处于中间地带，兼具多种气质特点，随环境灵活变化，气质特征不典型。' };
+      var bandTxt = function(t){ return t >= 60 ? '偏高' : (t <= 40 ? '偏低' : '中等'); };
+      var listRows = EPQ_ORDER.map(function(k){
+        var n = EPQ_NORMS[k], t = res.ts[k];
+        var note = (t >= 60 ? n.hi : (t <= 40 ? n.lo : n.mid)) + '（T=' + t + '，' + bandTxt(t) + '）';
+        return { title: k + ' ' + n.name, value: res.raw[k] + '/' + n.max, note: note };
+      });
+      var lHigh = res.ts.L >= 60;
+      return {
+        primary: tem.n,
+        primarySub: tem.d.split('：')[0],
+        epqT: { E: tE, N: tN, P: res.ts.P, L: res.ts.L },
+        badge: '外向E T=' + tE + ' · 稳定N T=' + tN + ' · 精神P T=' + res.ts.P + ' · 掩饰L T=' + res.ts.L + (lHigh ? '（提示有掩饰）' : ''),
+        list: listRows,
+        sections: [
+          { title:'气质类型解读', html:'<div style="font-size:13px;color:#444;line-height:1.8;">' + tem.d + '</div>' +
+            '<div style="font-size:12px;color:#999;line-height:1.7;margin-top:8px;">气质类型由 E（外向）与 N（情绪稳定性）两个维度组合划分，传统四种气质仅供参照，无好坏之分。</div>' },
+          { title:'E 外向-内向', html:'<div style="font-size:13px;color:#444;line-height:1.8;">' + EPQ_NORMS.E[tE >= 60 ? 'hi' : (tE <= 40 ? 'lo' : 'mid')] + '</div>' },
+          { title:'N 情绪稳定性', html:'<div style="font-size:13px;color:#444;line-height:1.8;">' + EPQ_NORMS.N[tN >= 60 ? 'hi' : (tN <= 40 ? 'lo' : 'mid')] + '</div>' },
+          { title:'P 精神质', html:'<div style="font-size:13px;color:#444;line-height:1.8;">' + EPQ_NORMS.P[res.ts.P >= 60 ? 'hi' : (res.ts.P <= 40 ? 'lo' : 'mid')] + '</div>' },
+          { title:'L 掩饰度', html:'<div style="font-size:13px;color:#444;line-height:1.8;">' + EPQ_NORMS.L[lHigh ? 'hi' : (res.ts.L <= 40 ? 'lo' : 'mid')] + (lHigh ? '<br><span style="color:#E67E22;">建议以更放松的状态重测一次，结果会更贴近真实。</span>' : '') + '</div>' }
+        ],
+        advice: ['EPQ 关注三个稳定的人格维度，得分描述“目前的倾向”，会随年龄与经历缓慢变化。','重点看 E 与 N 的组合：它提示你适合的工作节奏与环境刺激水平。','若 L 偏高，可回想作答时是否有“把自己往好处说”的倾向，间隔一段时间重测会更准。']
+      };
+    },
+    metaOf: function(out){ var t = out.epqT || {}; return { summary: out.primary, meta: 'E T' + (t.E!=null?t.E:'?') + ' / N T' + (t.N!=null?t.N:'?') }; }
+  });
+
+  // ================= 情商测评（Schutte 情绪智力量表 EIS，33 题）=================
+  var EIS_LIKERT = ['很不符合','不符合','一般','符合','很符合'];
+  var EIS_REVERSE = [4, 27, 32]; // 第 5、28、33 题反向计分（0 基）
+  var EIS_DIMS = [
+    { name:'情绪的感知与表达', idxs:[0,3,5,8,10,11,12,14,15,17,18,21,24,25,28,31,32] },
+    { name:'情绪的调节',       idxs:[1,2,6,7,9,13,16,20,22,26,27,30] },
+    { name:'情绪的运用',       idxs:[4,19,23,29] }
+  ];
+  var EIS_Q = ['我知道应该什么时候和别人谈论我的私人问题。','遇到某种困难时，我能够回忆起来以前面对同样困难并克服它们的时候。','我期望我能做好自己想做的大多数事情。','别人很容易信任我。','我觉得我难以理解别人的肢体语言（如面部表情、肢体动作等）。','我生命中的一些重大事件，让我重新评估生命中什么是最重要的。','心境好的时候，我就能看到新的希望。','评价我的生活是否有意义，情绪是其中的影响因素之一。','我能清楚地意识到自己体验到的情绪。','我希望能够有好的事情发生。','我喜欢和别人分享自己的情绪。','情绪好的时候，我知道如何把它延长。','安排事情的时候，我尽可能使别人感到满意。','我会去寻找一些让自己感到开心的活动。','我能够清楚意识到自己传递给别人的非语言信息。','我尽量做的好一些，以便给别人留下好的印象。','心情好的时候，解决问题对我来说很容易。','我能够通过观察别人的面部表情而辨别他的情绪。','我知道自己情绪变化的原因。','我心情好的时候，新奇的想法就会多一些。','我能够控制自己的情绪。','我能够清楚意识到自己在某一时刻的情绪。','学习时，我会想象即将取得好成绩而激励自己。','别人在某个方面做的很好时，我会加以称赞。','我能够了解别人传递给我的非言语信息。','别人告诉我他人生中的某种重大事情时，我几乎感觉到好像发生在自己身上一样。','我感到情绪变化时，就会涌现一次新颖的想法。','遇到困难时，一想到可能会失败，我就会退却。','只要看上一眼，我就知道别人的情绪是怎样的。','别人消极时，我能够给予帮助，使他感觉好一点。','遇到挫折时，我能够保持良好的情绪而应对挑战。','我能够通过别人讲话的语调判断他当时的情绪。','我难以理解别人的想法和感受。'];
+  var EIS_BANDS = [
+    { max:82,  lvl:'较低', c:'#E8703A', d:'你的情绪感知与调节能力尚未系统建立，可先尝试情绪觉察练习，逐步识别、命名并接纳自己的感受，再练习有意识地调节。' },
+    { max:115, lvl:'中等', c:'#5B6EF5', d:'你具备基本的情绪能力，在面对熟悉情境时处理得当；在压力或高冲突情境下仍可进一步练习情绪的表达与调节技巧。' },
+    { max:148, lvl:'较高', c:'#34B76F', d:'情绪感知、调节与运用能力较强，能较好地理解自己与他人情绪，人际关系适应良好，具备不错的自我管理基础。' },
+    { max:165, lvl:'很高', c:'#1a1a1a', d:'情绪智力突出，能敏锐感知并有效调节情绪，善于借情绪推动思考与决策，在团队沟通与影响他人方面有显著优势。' }
+  ];
+  SCALES.push({
+    id:'eis', cat:'eq', name:'Schutte 情商测评', color:'fi-purple',
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>',
+    desc:'33 题 · 5 级评量 · 三大维度', minutes: 6,
+    questions: EIS_Q.map(function(t){
+      return { text:t, opts: EIS_LIKERT.slice() };
+    }),
+    scoring: function(a){
+      var total = 0, dims = [0,0,0], i;
+      for (i = 0; i < 33; i++) {
+        var raw = a[i] == null ? 2 : a[i];           // 缺省按中性处理，正常作答必填
+        var val = (EIS_REVERSE.indexOf(i) >= 0) ? (5 - raw) : (raw + 1);
+        total += val;
+        for (var k = 0; k < EIS_DIMS.length; k++) { if (EIS_DIMS[k].idxs.indexOf(i) >= 0) { dims[k] += val; } }
+      }
+      return { total: total, dims: dims };
+    },
+    renderer: function(res){
+      var band = EIS_BANDS[0];
+      for (var i = 0; i < EIS_BANDS.length; i++) { if (res.total <= EIS_BANDS[i].max) { band = EIS_BANDS[i]; break; } }
+      var dimRows = EIS_DIMS.map(function(dd, k){
+        var max = dd.idxs.length * 5;
+        return { title: dd.name, value: res.dims[k] + '/' + max, note: '占该维满分 ' + Math.round(res.dims[k]/max*100) + '%' };
+      });
+      return {
+        primary: band.lvl + '情绪智力',
+        primarySub: 'EIS 总分 ' + res.total + ' / 165 —— ' + band.d,
+        badge: '总分 ' + res.total,
+        list: dimRows,
+        sections: [
+          { title:'维度解读', html: dimRows.map(function(r){ return '<div style="font-size:13px;color:#444;line-height:1.8;padding:8px 0;border-bottom:0.5px solid #F0F0F0;"><b>' + r.title + '</b> ' + r.value + '</div>'; }).join('') },
+          { title:'主要参考', html:'<div style="font-size:13px;color:#999;line-height:1.7;">Schutte EIS 通常以总分作为主要指标；三大维度为参考划分，不同研究因子结构略有差异。总分越高代表情绪智力水平越高。</div>' }
+        ],
+        advice: ['情绪智力是可训练的：坚持每日记录情绪“事件—感受—反应”，一周后你会更懂自己的情绪触发点。','练习“情绪命名+原因归因”：准确说出“我现在是X情绪，因为Y”，能显著提升调节能力。','可结合「价值观测评」与性格类测评交叉参考，更全面地理解你的职场与生活模式。']
+      };
+    },
+    metaOf: function(out){ return { summary: out.primary, meta: out.badge }; }
+  });
+
+  // ================= 领导力测评（领越 LPI，30 题）=================
+  var LPI_LEVELS = ['几乎从不','极少','很少','偶尔','不定期地','间或','还算经常','通常','非常频繁','几乎总是'];
+  var LPI_DIMS = [
+    { name:'以身作则', desc:'以行动和价值观树立榜样，靠“说到做到”建立可信度，是领导力的根基。' },
+    { name:'共启愿景', desc:'描绘令人向往的未来，让团队成员看到自己工作的意义与长远价值。' },
+    { name:'挑战现状', desc:'主动寻求创新机会、勇于尝试与冒险，在试错中推动组织变革与进步。' },
+    { name:'使众人行', desc:'建立信任与协作，通过授权、尊重与分享成长机会，放大团队的整体战斗力。' },
+    { name:'激励人心', desc:'认可与庆祝每一次贡献，用真诚的肯定点燃团队热情与持续投入。' }
+  ];
+  var LPI_Q = ['在要求他人之前会以身作则','会花时间和精力来确保同事们按已经达成一致的原则和标准工作','履行做出的誓言和承诺','会对自己的行为如何影响他人的表现征询反馈意见','会努力让他人接受对组织运营最为有利的价值体系','清楚自己的领导理念','会谈论未来的发展对我们现在所做工作的影响','能描绘出令人信服的我们的未来远景','呼吁他人一起分享对美好未来的憧憬','向大家展示他们的长期利益是可以在共同的目标和愿景下实现的','能勾画出我们渴望实现的宏伟蓝图','阐述我们所做工作的深远意义和目的，并对所说的确信不疑','会寻找具有挑战性的机会来检验自己的技能和才干','要求员工在所做的工作中尝试创新','会打破部门或组织之间的界限，在部门或组织之外寻找创新的方法来改进工作','当事情同预期发展不一样时，会问“我能从中学到什么？”','对正在执行的计划和项目能够确保设定可实现的目标，制定具体的计划，并设计可衡量的标准','即使有失败的可能，也敢于尝试和冒险','可以和同事建立起良好的合作关系','乐于倾听各种不同人的见解','让团队的同事知道被测评者对他们胜任工作能力充满信心','尊重他人的尊严','支持他人独立做出决定','给予员工充分的自由去决定如何进行他们的工作','确保员工能通过学习新的技能在工作中成长，并得到自身发展','会对工作完成得好的人员提出表扬','能确保以富有创意的方式对项目中做出突出贡献员工进行奖励','会当众表彰那些为实现共同价值而奋斗的人','用不同的方法来为我们取得的成果进行庆祝','对团队成员所做的贡献给予许多表扬和支持'];
+  SCALES.push({
+    id:'lpi', cat:'leadership', name:'领导力实践测评（LPI）', color:'fi-amber',
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+    desc:'30 题 · 10 级频率 · 五维度', minutes: 6,
+    questions: LPI_Q.map(function(t){ return { text:'我' + t, opts: LPI_LEVELS.slice() }; }),
+    scoring: function(a){
+      var sums = [0,0,0,0,0], i;
+      for (i = 0; i < 30; i++) { sums[Math.floor(i/6)] += (a[i] == null ? 4 : (a[i] + 1)); }
+      var order = [0,1,2,3,4].sort(function(x,y){ return (sums[y]-sums[x]) || (x-y); });
+      return { sums: sums, order: order };
+    },
+    renderer: function(res){
+      var top = res.order[0];
+      var lowest = res.order[res.order.length - 1];
+      var bars = res.sums.map(function(v, k){
+        return { name: LPI_DIMS[k].name, a: Math.round(v/60*100), b: 100 - Math.round(v/60*100), aLabel: v + ' 分', bLabel: '满分 60' };
+      });
+      var dimHtml = res.order.slice(0, 3).map(function(k){
+        return '<div style="font-size:13px;color:#444;line-height:1.7;padding:8px 0;border-bottom:0.5px solid #F0F0F0;"><b>' + LPI_DIMS[k].name + '</b>（' + res.sums[k] + '/60）<br><span style="color:#999;">' + LPI_DIMS[k].desc + '</span></div>';
+      }).join('');
+      var listRows = LPI_DIMS.map(function(_, k){
+        var note = k === top ? '你的优势领导行为' : (k === lowest ? '相对待提升' : '');
+        return { title: LPI_DIMS[k].name, value: res.sums[k] + '/60', note: note };
+      });
+      return {
+        primary: LPI_DIMS[top].name,
+        primarySub: '你最突出的领导行为习惯：『' + LPI_DIMS[top].name + '』。五项行为中，' + LPI_DIMS[lowest].name + '相对有提升空间。',
+        badge: '五维度 · 最强：' + LPI_DIMS[top].name,
+        bars: bars,
+        list: listRows,
+        sections: [ { title:'Top 领导行为解读', html: dimHtml } ],
+        advice: ['把最强维度当作你的领导名片，在合适的场景主动发挥；同时每月刻意练习一个待提升维度的具体行为。','领导力 = 行为习惯而非职位头衔：借助 360 度反馈（上级、同事、下属）比对自我认知与他人认知。','让五项行为形成闭环：先“以身作则”立信，再“共启愿景”定向，以“挑战现状”破局、“使众人行”聚能、“激励人心”续航。']
+      };
+    },
+    metaOf: function(out){ return { summary: out.primary, meta: (out.badge||'').replace('五维度 · 最强：','') }; }
+  });
+
+  // ================= 压力/心理健康测评（知觉压力量表 PSS-14）=================
+  var PSS_OPT = ['从不','偶尔','有时','常常','总是'];
+  var PSS_REVERSE = [3,4,5,6,8,9,12]; // 第 4、5、6、7、9、10、13 题反向（0 基）
+  var PSS_Q = ['对某些突然发生的事情感到不安。','感觉到总是无法控制生活上重要的事。','感觉到紧张不安和压力。','成功地处理生活上令人烦躁的事。','感觉到自己是有效地处理生活上的重大转变。','对于有能力处理个人问题感到充满信心。','感觉到事事顺利。','发现你是无法处理各样应要做的事。','有办法控制生活中恼人的事情。','感到事事驾轻就熟。','经常因为一些自己无法控制的事情而生气。','发现自己在想那些自己必须完成的事情。','能够控制自己处理事情的方式（常能掌握时间安排方式）。','感到困难的事情堆积如山，而自己无法克服它们。'];
+  var PSS_BANDS = [
+    { max:18, lvl:'低压力', note:'应对资源充足，压力感知较低。' },
+    { max:28, lvl:'中等压力', note:'存在一定压力，需关注应对方式。' },
+    { max:42, lvl:'较高压力', note:'压力感知明显，建议主动调节。' },
+    { max:56, lvl:'高压力', note:'压力负荷较重，建议寻求专业支持。' }
+  ];
+  SCALES.push({
+    id:'pss', cat:'stress', name:'知觉压力量表（PSS-14）', color:'fi-rose',
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 6v6l4 2"/></svg>',
+    desc:'14 题 · 回顾近一个月', minutes: 2,
+    questions: PSS_Q.map(function(t){ return { text:t, opts: PSS_OPT.slice() }; }),
+    scoring: function(a){
+      var total = 0, i;
+      for (i = 0; i < 14; i++) {
+        var raw = a[i] == null ? 2 : a[i];
+        total += (PSS_REVERSE.indexOf(i) >= 0) ? (4 - raw) : raw;
+      }
+      return { total: total };
+    },
+    renderer: function(res){
+      var band = PSS_BANDS[0];
+      for (var i = 0; i < PSS_BANDS.length; i++) { if (res.total <= PSS_BANDS[i].max) { band = PSS_BANDS[i]; break; } }
+      var color = res.total >= 43 ? '#E11D48' : res.total >= 29 ? '#E8703A' : res.total >= 19 ? '#5B6EF5' : '#34B76F';
+      return {
+        primary: band.lvl,
+        primarySub: 'PSS 总分 ' + res.total + ' / 56 —— ' + band.note,
+        badge: '总分 ' + res.total + (res.total >= 43 ? ' · 建议关注':''),
+        sections: [
+          { title:'解读', html:'<div style="font-size:13px;color:' + color + ';font-weight:600;">' + band.lvl + '（' + res.total + '/56）</div><div style="font-size:13px;color:#666;line-height:1.8;margin-top:6px;">' + band.note + '</div><div style="font-size:12px;color:#999;line-height:1.7;margin-top:8px;">PSS 测量的是你对生活情境的“主观压力感知”，而非压力事件本身。适度短期压力有助于激发动机，长期高压力与睡眠障碍、焦虑抑郁、心血管疾病风险相关。</div>' },
+          { title:'自评提示', html:'<div style="font-size:13px;color:#666;line-height:1.8;">若你的得分偏高且持续一段时间，建议主动调整工作节奏、增加运动与倾诉，并考虑寻求专业心理咨询支持。本结果仅作参考，不构成诊断。</div>' }
+        ],
+        advice: ['给压力“定位”：把它拆成“能改变的事”与“不能改变的事”，只对前者采取行动，能显著降低失控感。','保证 7-8 小时睡眠与每周 150 分钟中等强度运动，是成本最低、最有效的减压方式。','若持续偏高或影响日常，请优先寻求专业心理支持——照顾自己不是软弱。']
+      };
+    },
+    metaOf: function(out){ return { summary: out.primary + ' ' + out.badge.replace('总分','').trim(), meta: out.badge }; }
+  });
+
+  // ================= 学习风格测评（VARK，16 题可多选）=================
+  var VARK_STYLES = [
+    { code:'V', name:'视觉型', d:'通过图片、图表、视频、思维导图等视觉信息学习效果最佳；看比读更能记住。', tip:'多用彩色笔记、流程图、概念图、看录像与图示复习。' },
+    { code:'A', name:'听觉型', d:'通过听讲、讨论、朗读、音频等听觉渠道学习效果最佳；声音能帮你记住信息。', tip:'用语音笔记、多听播客/讲座、和朋友讲解复述、把要点读出声。' },
+    { code:'R', name:'读写型', d:'通过阅读文字、做笔记、写总结等读写方式学习效果最佳；文字是你的母语。', tip:'制作清单、讲义、读书笔记，把概念写成自己的话，善用文字资料复习。' },
+    { code:'K', name:'动觉型', d:'通过动手实践、体验、操作、案例模拟等方式学习效果最佳；做出来的才会真正记住。', tip:'用实物操作、案例演练、实验动手、make use of 学习工具与真实场景练习。' }
+  ];
+  var VARK_Q = [
+    ['有人想去你所在地的机场、城中心或火车站，你要帮助他。你会：',['陪他（她）一起走','告诉他（她）方向','写下行走路线（不画图）','给他（她）一张地图或者画张路线图'],['K','A','R','V']],
+    ['“独立”这个词的英语拼写应该是dependant还是dependent，你没有把握，你会：',['在头脑中想一下这两个词的拼写，然后选择','考虑一下这两个词的读音，然后选择','查词典','把这两个词写在纸上，然后选择'],['V','A','R','K']],
+    ['你为别人安排度假，你想听听他们对度假安排的意见，你会：',['口头向他们讲述一些重要安排','利用地图或网站标明要走的地方','给他们一份打印的行程表','给他们打电话或发电子邮件'],['K','V','R','A']],
+    ['你准备为家人做饭，以示庆贺。你会：',['做自己会做的饭菜','请朋友给一些建议','浏览烹饪书，从图片中获得灵感','查找某本烹饪书，你知道里面有一个很好的食谱'],['K','A','V','R']],
+    ['一群游客要了解你所在地区的公园或者野生动物保护区的情况。你会：',['与之交谈或者为他们举办一个有关公园或野生动物保护区的讲座','给他们看一些网上的图片、照片或画册','带他们到公园或野生动物保护区，并陪他们逛逛','发给他们一本有关公园或野生动物保护区的书或者宣传手册'],['A','V','K','R']],
+    ['你打算买一部数码相机或手机。不考虑价格，什么最能影响你的决定？',['试用或者测试','阅读关于其特点的详细说明','设计时髦，看起来很好','销售人员告知我有关其特点'],['K','R','V','A']],
+    ['回忆一下你曾有过学习新事物的时候，不包括纯粹的身体技能，如骑自行车。你通过以下哪种方式学习：',['观看示范','倾听某人讲解并提问','图形和表格——视觉信息','文字说明，如手册或教材'],['K','A','V','R']],
+    ['你的膝盖有毛病，你希望医生如何对你解释：',['给一个网址或相关的文字材料','利用一个膝盖的模型演示你的病患','口头描述你的病患','画图显示你的病患'],['R','K','A','V']],
+    ['你想学习一个新的电脑软件、技能或游戏，你会：',['阅读该软件的说明','与熟悉该软件的人交流','使用键盘或控制器','遵循所附书籍上的图一步一步去做'],['R','A','K','V']],
+    ['我喜欢网站具有：',['可以点击、链接或尝试的内容','有趣的设计和视觉冲击力','有趣的文字叙述、目录和解说','音频，可以听音乐、电台广播或访谈节目'],['K','V','R','A']],
+    ['不考虑价格，买一本非小说类书籍，什么最能影响你的决定？',['看起来很吸引人','我会快速阅读部分章节','有朋友谈论并推荐过','有真实的故事、经历和事例'],['V','R','A','K']],
+    ['你正通过一本书、CD或网站学习如何使用数码相机拍照，你希望他们提供：',['能有一个提问并且交流有关相机及其特点的机会','关于怎样改进的详细文字列表说明','标明相机每个部件功能的示意图','拍得好与不好的照片及怎样改进这些照片的大量实例'],['A','R','V','K']],
+    ['你更愿意一位老师或报告人使用下列哪种方式？',['示范，模型或实践课','问答交谈，小组讨论或请人讲座','打印稿，书籍或阅读材料','图型，表格或曲线图'],['K','A','R','V']],
+    ['你已完成一次竞赛或测验，想知道结果。你希望通过以下哪种方式获知结果？',['从你已完成的情况中选取实例','通过书面形式，获知结果','通过与某人交谈，加以了解','使用曲线图显示你完成的情况'],['K','R','A','V']],
+    ['你要在一家餐馆或自助餐厅点菜，你会：',['选择你以前在那里吃过的食物','听从侍者的建议或朋友推荐','看菜单上的菜名点菜','看别人在吃什么或者看看每道菜的图片'],['K','A','R','V']],
+    ['你得在一次会议或特殊时刻发表重要讲话，你会：',['做出图表或曲线图来帮助讲解','写几个关键词并且反复练习讲稿','写出讲稿并反复阅读，熟悉内容','搜集许多事例和故事，使讲话真实，切合实际'],['V','A','R','K']]
+  ];
+  SCALES.push({
+    id:'vark', cat:'learning', name:'VARK 学习风格测评', color:'fi-teal',
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>',
+    desc:'16 题 · 可多选 · V/A/R/K', minutes: 3,
+    questions: VARK_Q.map(function(row){
+      return { text: row[0], multi: true, opts: row[1].slice() };
+    }),
+    scoring: function(a){
+      var counts = { V:0, A:0, R:0, K:0 }, i, j;
+      for (i = 0; i < 16; i++) {
+        var sel = a[i]; if (!Array.isArray(sel)) continue;
+        for (j = 0; j < sel.length; j++) { counts[VARK_Q[i][2][sel[j]]]++; }
+      }
+      var order = ['V','A','R','K'].sort(function(x,y){ return (counts[y]-counts[x]) || (x<y?-1:1); });
+      return { counts: counts, order: order };
+    },
+    renderer: function(res){
+      var dom = res.order[0];
+      var st = VARK_STYLES.filter(function(s){ return s.code === dom; })[0];
+      var listRows = VARK_STYLES.map(function(s){
+        var note = res.counts[s.code] === res.counts[dom] && s.code === dom ? '你的主导学习风格' : (res.counts[s.code] > 0 ? '' : '未选择');
+        return { title: s.code + ' · ' + s.name, value: res.counts[s.code] + ' 题', note: note };
+      });
+      var secHtml = VARK_STYLES.map(function(s){
+        return '<div style="padding:8px 0;border-bottom:0.5px solid #F0F0F0;"><b>' + s.code + ' ' + s.name + '</b>（' + res.counts[s.code] + '）<br><span style="color:#666;line-height:1.7;">' + s.d + '<br><span style="color:#999;">学习策略：' + s.tip + '</span></span></div>';
+      }).join('');
+      return {
+        primary: st.name + ' · ' + st.code,
+        primarySub: '你最高的学习风格是「' + st.name + '」。真正高效的学习，是围绕你的偏好风格来选择材料，同时补齐其他通道。',
+        badge: 'V ' + res.counts.V + ' / A ' + res.counts.A + ' / R ' + res.counts.R + ' / K ' + res.counts.K,
+        list: listRows,
+        sections: [ { title:'四种风格说明', html: secHtml } ],
+        advice: ['把风格当“策略菜单”而非标签：多通道输入（听+看+写+做）往往比单一通道记忆更牢固。','在你偏好的通道上投入，同时刻意练习偏弱的通道，让学习方式更多元。','学习风格理论在学界仍有争议，更适合作为学习策略多样性的参考，而非固定自我标签。']
+      };
+    },
+    metaOf: function(out){ return { summary: out.primary, meta: (out.badge||'') }; }
+  });
+
+  // ================= 团队角色测评（贝尔宾 BTRSPI，7 部分 × 9 项分配 10 分）=================
+  var BELBIN_ROLES = [
+    { code:'A', name:'专家', d:'专业水准高、自我激励、专心致志，为团队提供知识与技能。' },
+    { code:'B', name:'凝聚者', d:'善于交际、温和敏感，调和气氛、推动团队合作精神。' },
+    { code:'C', name:'智多星', d:'个人主义、富有创新精神，是团队创造力与想象力的源泉。' },
+    { code:'D', name:'协调者', d:'冷静自信、克制内敛，让不同成员朝共同目标努力。' },
+    { code:'E', name:'鞭策者', d:'精力充沛、充满活力，直面阻碍、推动团队取得成果。' },
+    { code:'F', name:'善始善终者', d:'兢兢业业、认真负责，按最高标准推进并把事情收尾。' },
+    { code:'G', name:'监督评论员', d:'审慎理性、判断力强，善于评估方案、避免团队走偏。' },
+    { code:'H', name:'实干家', d:'稳健尽忠、组织能力强，把想法落成可执行的步骤。' },
+    { code:'I', name:'资源调查员', d:'外向热情好奇，善于发掘外部机会与资源、建立联系。' }
+  ];
+  var BELBIN_Q = [
+    '我认为自己可以为一支团队做出如下贡献',
+    '如果说在团队中我可能有缺点的话，它们一般是',
+    '当跟他人共同完成一个项目或计划时',
+    '我处理团队工作的特点或方式是',
+    '我从工作中获得满足是因为',
+    '如果我突然接到一项时间紧、难度大、需要与不熟悉的人合作的任务时',
+    '与团队一起工作中遇到问题时'
+  ];
+  var BELBIN_ITEMS = [
+    ['我的技术知识和经验通常是我的主要财富。','我善于与各种各样类型的人打交道。','我总有许多点子。','我善于发现其他人身上对于团队的总任务有价值的才能，并合理加以利用。','我做任何事情，都会把它做完。','为了确保事物的正确性，我总会采取坦率和直言不讳的态度。','通常我总是可以事先判断一项计划或想法是否会适合解决某个特定情况。','寻找某一问题的解决方案时，我通常可以提供无偏见、经过理性分析的方案。','我一般能够很快发现新机会并加以利用。'],
+    ['如果会议安排不合理、缺乏控制和有效的组织，我就会感到不舒服。','除非我对此事物比较了解，一般我不会随便提出我的看法。','一旦团队讨论新的话题时，我都喜欢大发议论。','由于我的客观性，经常使我不能立即热情主动地与别人配合。','在处理重大问题时，有时我会被认为有武断、专横的倾向。','我发现领导别人很困难，也许是因为我过多考虑别人情绪和团队和谐气氛。','我有时过于沉湎于思考自己的主意和想法而忽略了事情的发展和变化。','我不愿对不完整、细节不充分的方案发表意见。','如果有人有合理的意见而没有充分的机会表达，我会非常倾向于给人家时间和机会。'],
+    ['我具备有效影响别人而又不使人感受到压力的才能。','一般来讲，我能够有效地避免因大意而引起的错误或遗漏，从而避免这类错误给整个运作造成失败的可能性。','我常在必要时采取行动以保证会议不浪费时间或偏离主题。','我总是努力保持自己的行为准则。','我随时准备支持对于大家利益都有好处的建议。','我常常能够很快地从新想法、新发展中看到机会的可能性。','我相信我的判断能力能帮我做出正确的决策。','别人可以相信我一定会把组织有序的工作方式带进工作当中。','别人可以信赖我的是，我一定可以在会上提出一些有创意的新意见。'],
+    ['我以一种耐心静观的方式来了解团队其它成员。','我会自然地对于其他人的观点和看法提出异议，或个人保留少数意见。','只有当我自己比较了解一个事物时，我才会就此事物提出我自己的观点。','一旦一项计划被决定下来需要执行，我就有办法使其实施成功。','我宁愿下功夫深入了解那些事物的本质，而不是对事物的了解停留在表面。','我对我做的任何工作都尽量追求完美与精确无误。','我愿意承担对外联络一类的工作。','我善于倾听各方面的意见，但必要时我亦会毫不犹豫地当机立断。','对于站不住脚的观点或方案，我通常会找到一系列论据对其加以批驳。'],
+    ['我喜欢对事物进行分析并权衡所有的解决方案。','我对于寻找最实际的解决方案最感兴趣。','我更倾向于建立和保护良好的团队工作关系。','我可以在很大程度上对决策产生影响。','我有机会接触到新人与不同的想法。','我有能力使别人对于任务目标及其关键问题达成共识。','我感到可以尽情发挥自己的特长及技能。','我可以有机会进一步开发我的想象力。','我感觉在我的工作范围内我可以集中精力做好一项工作。'],
+    ['我会像自己单独完成这项任务一样找出解决方案，而后设法说服团队成员按我的方案去做。','我愿意与表现得积极的人一起工作，即使他可能难于相处。','我会设法通过让每个成员都发挥长处来完成这项工作量很大的任务。','我天生的紧迫感能确保我们按时完成任务。','我相信我会保持冷静和理智思考能力。','尽管会有冲突的压力，我还是会按计划进行必要的工作使项目向前推进。','如果团队工作没有进展，我将毫不犹豫地站出来发挥带头作用。','我会启发大家展开讨论，激发起新的想法使项目向前推进。','我一般会尽量地收集和了解有关这一任务的情况。'],
+    ['当有人影响团队进展速度时，我可能会作出过激的反应。','有人会批评我对什么事情都太注重理性分析。','有些人不喜欢我致力于检查重要细节以确保其准确的做法。','除非我可以同能让我兴奋的成员一起工作，否则我会很快觉得乏味。','我经常认为在团队里工作是浪费时间，我想我独自做恐怕会做得更好。','对于我来讲，把我思考出来的复杂的观点介绍给大家有时是件很不容易的事。','我意识到有时我要求别人做我自己也做不到的事情。','在难以应付的人或重要人物面前，我总是不愿表达我的个人意见。','当工作目标不明确时，我发现我很难开始工作。']
+  ];
+  SCALES.push({
+    id:'belbin', cat:'teamrole', name:'贝尔宾团队角色测评', color:'fi-pink',
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/><line x1="12" y1="4" x2="12" y2="20"/></svg>',
+    desc:'7 部分 × 9 项 · 每部分分配 10 分', minutes: 8,
+    questions: BELBIN_Q.map(function(title, qi){
+      return {
+        text: '第' + (qi + 1) + '部分：' + title,
+        mode: 'allocate', allocTotal: 10,
+        opts: BELBIN_ITEMS[qi].map(function(it, oi){
+          return BELBIN_ROLES[oi].code + '. ' + it;
+        })
+      };
+    }),
+    scoring: function(a){
+      var totals = [0,0,0,0,0,0,0,0,0], s, oi;
+      for (s = 0; s < 7; s++) {
+        var arr = a[s]; if (!Array.isArray(arr)) continue;
+        for (oi = 0; oi < 9; oi++) { totals[oi] += (arr[oi] || 0); }
+      }
+      var order = [0,1,2,3,4,5,6,7,8].sort(function(x,y){ return (totals[y]-totals[x]) || (x-y); });
+      return { totals: totals, order: order };
+    },
+    renderer: function(res){
+      var top = res.order[0], second = res.order[1], weak = res.order[res.order.length - 1], weak2 = res.order[res.order.length - 2];
+      var listRows = BELBIN_ROLES.map(function(r, i){
+        var note = i === top ? '你的核心团队角色' : (i === second ? '备份角色' : (i === weak || i === weak2 ? '相对较弱' : ''));
+        return { title: r.code + ' · ' + r.name, value: res.totals[i] + '/70', note: note };
+      });
+      var secHtml = '<div style="font-size:13px;color:#444;line-height:1.8;padding:8px 0;border-bottom:0.5px solid #F0F0F0;"><b>核心角色：' + BELBIN_ROLES[top].name + '</b><br><span style="color:#999;">' + BELBIN_ROLES[top].d + '</span></div>' +
+        '<div style="font-size:13px;color:#444;line-height:1.8;padding:8px 0;border-bottom:0.5px solid #F0F0F0;"><b>备份角色：' + BELBIN_ROLES[second].name + '</b>（' + res.totals[second] + ' 分）<br><span style="color:#999;">' + BELBIN_ROLES[second].d + '</span></div>' +
+        '<div style="font-size:13px;color:#444;line-height:1.8;padding:8px 0;"><b>待关注：' + BELBIN_ROLES[weak].name + '</b>（' + res.totals[weak] + ' 分）<br><span style="color:#999;">建议寻找能弥补这方面的同事协作，而非强行改变自己。</span></div>';
+      return {
+        primary: BELBIN_ROLES[top].name,
+        primarySub: '你在团队中最适合扮演的核心角色是「' + BELBIN_ROLES[top].name + '」，备份角色为「' + BELBIN_ROLES[second].name + '」。',
+        badge: '9 角色 · 最强：' + BELBIN_ROLES[top].name,
+        list: listRows,
+        sections: [ { title:'角色解读', html: secHtml } ],
+        advice: ['扬长优于补短：让核心角色成为你的主战场，备份角色在团队不需要时顶上。','标出最弱的两个角色，主动与在这些方面强的伙伴互补，而非执意改变自己。','请 4-8 名同事做他评（或共创团队来看分布），自评+他评双校验会让结论更接近真实。']
+      };
+    },
+    metaOf: function(out){ return { summary: out.primary, meta: (out.badge||'').replace('9 角色 · 最强：','') }; }
+  });
+
+  // ================= 能力与潜力测评（GATB 自评版，45 题）=================
+  var GATB_OPT = ['弱','较弱','一般','较强','强'];
+  var GATB_DIMS = [
+    { code:'G', name:'智能（一般学习能力）', d:'理解原理、推理判断、适应新环境的能力。', career:'管理、研究、教育、策划' },
+    { code:'V', name:'言语能力', d:'理解语言意义、表达信息与想法的能力。', career:'写作、编辑、律师、教师、销售' },
+    { code:'N', name:'数理能力', d:'快速计算与推理、解决应用问题的能力。', career:'会计、金融、工程、数据分析' },
+    { code:'S', name:'空间判断能力', d:'理解立体图形及平面与立体关系的能力。', career:'设计、建筑、机械、美术' },
+    { code:'P', name:'形态知觉能力', d:'对实物或图解细微部分的知觉与辨别能力。', career:'质检、制图、外科、精密制造' },
+    { code:'Q', name:'书写知觉能力', d:'对文字、印刷物细微部分的正确知觉能力。', career:'文秘、校对、档案管理、数据录入' },
+    { code:'K', name:'眼手运动协调能力', d:'眼手协调、迅速准确完成操作的能力。', career:'技工、运动员、外科医生、装配' },
+    { code:'F', name:'手指灵巧度', d:'快速准确操作细小物品的手指能力。', career:'电子装配、缝纫、外科、乐器演奏' },
+    { code:'M', name:'手腕灵巧度', d:'手及手腕灵巧活动的能力。', career:'手工制作、烹饪、机械维修、雕塑' }
+  ];
+  var GATB_Q = ['快而容易地学习新的内容','快而正确地解决数学题目','你的学习成绩总处于','对课文的理解、分析、综合能力','对所学知识的记忆能力','善于表达自己的观点','阅读速度和理解能力','掌握词汇量的程度','你的语文成绩','你的文学创作能力','做出精确的测量','笔算能力','口算能力','打算盘','你的数学成绩','解决立体几何方面的习题','画三维度的立体图形','看几何图形的立体感','想象盒子展开后的平面图','想象三维度的物体','发现相似图形中的细微差别','识别物体的细节部分','注意物体的细节部分','观察物体的图像是否正确','对物体的细微描述','快而准确地抄写资料（如姓名、日期、电话号码等）','发现错别字','发现计算错误','能很快查找编码卡片','自我控制能力（如较长时间抄写资料）','玩电子游戏','打篮球、排球和踢足球等一类活动','打乒乓球、羽毛球运动','打算盘能力','打字能力','灵巧地使用很小的工具','穿针眼、编织等使用手指的活动','用手指做一件小工艺品','使用计数器的灵巧程度','弹琴','用手把东西分类','在推拉东西时手的灵活度','很快地削苹果皮','灵活地使用手工工具','在绘画、雕刻等手工活动中的灵活性'];
+  SCALES.push({
+    id:'gatb', cat:'ability', name:'能力与潜力测评（GATB）', color:'fi-slate',
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>',
+    desc:'45 题 · 9 大能力维度', minutes: 6,
+    questions: GATB_Q.map(function(t){ return { text:'我' + t, opts: GATB_OPT.slice() }; }),
+    scoring: function(a){
+      var sums = [0,0,0,0,0,0,0,0,0], i;
+      for (i = 0; i < 45; i++) { sums[Math.floor(i/5)] += (a[i] == null ? 2 : (a[i] + 1)); }
+      var order = [0,1,2,3,4,5,6,7,8].sort(function(x,y){ return (sums[y]-sums[x]) || (x-y); });
+      return { sums: sums, order: order };
+    },
+    renderer: function(res){
+      var top = res.order[0];
+      var t1 = GATB_DIMS[top];
+      var listRows = GATB_DIMS.map(function(dd, k){
+        var avg = (res.sums[k]/5).toFixed(1);
+        return { title: dd.code + ' · ' + dd.name, value: res.sums[k] + '/25', note: '均分 ' + avg + '/5' + (k === top ? ' · 你的优势维度' : '') };
+      });
+      var topHtml = res.order.slice(0, 4).map(function(k){
+        return '<div style="font-size:13px;color:#444;line-height:1.8;padding:8px 0;border-bottom:0.5px solid #F0F0F0;"><b>' + GATB_DIMS[k].code + ' ' + GATB_DIMS[k].name + '</b>（' + res.sums[k] + '/25，均 ' + (res.sums[k]/5).toFixed(1) + '）<br><span style="color:#999;">' + GATB_DIMS[k].d + ' 典型职业方向：' + GATB_DIMS[k].career + '</span></div>';
+      }).join('');
+      return {
+        primary: t1.code + ' ' + t1.name,
+        primarySub: '你的能力倾向剖析显示，最强的能力为「' + t1.name + '」——' + t1.d,
+        badge: '九维 · 优势：' + t1.code,
+        list: listRows,
+        sections: [
+          { title:'优势能力解读', html: topHtml },
+          { title:'使用建议', html:'<div style="font-size:13px;color:#666;line-height:1.8;">能力=天赋×练习×方向。优先把优势维度与岗位需求对齐，再围绕目标岗位刻意练习相对偏弱的维度，让潜力兑现为竞争力。可绘制“九维剖析图”，识别能力结构更为立体。</div>' }
+        ],
+        advice: ['能力是动态的：优势来自“天赋偏好+持续练习”，聚焦 1-2 个优势维度深耕，最容易建立差异化竞争力。','对照目标岗位的能力要求清单，找出你最匹配的 2-3 项，把它们写进简历与面试案例。','每半年重测一次，观察能力随投入的变化，让发展路径清晰可见。']
+      };
+    },
+    metaOf: function(out){ return { summary: out.primary, meta: (out.badge||'').replace('九维 · 优势：','') }; }
   });
 
   setTimeout(openVersionDialog, 500);
